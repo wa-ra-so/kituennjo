@@ -496,13 +496,15 @@
   },
   {
     "id": "chiba-perie",
-    "name": "ペリエ千葉 喫煙所（5F・6F）",
-    "lat": 35.607,
-    "lng": 140.123,
-    "address": "千葉県千葉市中央区新千葉 ペリエ千葉 5階・6階",
+    "name": "ペリエ千葉 喫煙所（5F・6F・ペリチカ）",
+    "lat": 35.6132,
+    "lng": 140.1133,
+    "address": "千葉県千葉市中央区新千葉1丁目 ペリエ千葉 5階・6階およびペリチカ（JR千葉駅直結）",
     "type": "屋内（商業施設）",
     "sources": [
-      "dr-stick https://dr-stick.shop/tips/column/chiba-station-smoking/"
+      "dr-stick https://dr-stick.shop/tips/column/chiba-station-smoking/",
+      "SHIORI https://shiori-tabi.jp/spots/6160",
+      "JREメディア https://media.jreast.co.jp/articles/4448"
     ]
   },
   {
@@ -1235,6 +1237,295 @@
     "sources": [
       "CLUB JT https://www.clubjt.jp/place/spot/pref-12/city-12003/area-1381/",
       "船橋市公式（指定喫煙所設置に伴う実証実験について） https://www.city.funabashi.lg.jp/machi/kankyou/003/p001507.html"
+    ]
+  },
+  {
+    "id": "chiba-sogo-4f",
+    "name": "そごう千葉店 4階広場 屋外喫煙所",
+    "lat": 35.6128,
+    "lng": 140.1105,
+    "address": "千葉県千葉市中央区新町1000 そごう千葉店 4階広場（24時間利用可）",
+    "type": "屋外（商業施設）",
+    "sources": [
+      "dr-stick https://dr-stick.shop/tips/column/chiba-station-smoking/",
+      "CLUB JT（千葉そごう） https://www.clubjt.jp/place/spot/pref-12/city-12037/area-11229/"
+    ]
+  },
+  {
+    "id": "chiba-beckscoffee-ekinaka",
+    "name": "BECK'S COFFEE SHOP ペリエ千葉エキナカ（改札内喫煙可）",
+    "lat": 35.6134,
+    "lng": 140.114,
+    "address": "千葉県千葉市中央区新千葉1丁目 JR千葉駅改札内 東側通路9・10番線側",
+    "type": "屋内（駅構内カフェ）",
+    "sources": [
+      "JREメディア https://media.jreast.co.jp/articles/4448",
+      "CLUB JT https://www.clubjt.jp/place/spot/pref-12/city-12037/area-1566/"
+    ]
+  },
+  {
+    "id": "soga-station-area",
+    "name": "蘇我駅周辺 喫煙所",
+    "lat": 35.586,
+    "lng": 140.129,
+    "address": "千葉県千葉市中央区今井 蘇我駅周辺（概算位置。千葉市は路上喫煙取締り地区あり）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT https://www.clubjt.jp/place/spot/pref-12/city-12037/area-1837/",
+      "千葉市公式（路上喫煙及びポイ捨て防止） https://www.city.chiba.jp/kankyo/junkan/haikibutsu/rojoukituenpoisue-boushi.html"
+    ]
+  },
+  {
+    "id": "inage-station-area",
+    "name": "稲毛駅周辺 喫煙所",
+    "lat": 35.635,
+    "lng": 140.087,
+    "address": "千葉県千葉市稲毛区小仲台 稲毛駅周辺（概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "たばこすう https://www.town-coupon.com/area/inage",
+      "千葉市公式（路上喫煙及びポイ捨て防止） https://www.city.chiba.jp/kankyo/junkan/haikibutsu/rojoukituenpoisue-boushi.html"
+    ]
+  },
+  {
+    "id": "lalaport-tokyobay",
+    "name": "ららぽーとTOKYO-BAY 喫煙所",
+    "lat": 35.687,
+    "lng": 139.99,
+    "address": "千葉県船橋市浜町2-1-1 ららぽーとTOKYO-BAY（各フロアに設置）",
+    "type": "屋内（商業施設）",
+    "sources": [
+      "館内喫煙所LaB. https://kannai-pk2.hateblo.jp/entry/41872090",
+      "CLUB JT（南船橋駅） https://www.clubjt.jp/place/spot/pref-12/city-12003/area-1905/"
+    ]
+  },
+  {
+    "id": "motoyawata-station-area",
+    "name": "本八幡駅周辺 喫煙所",
+    "lat": 35.7218,
+    "lng": 139.929,
+    "address": "千葉県市川市八幡 本八幡駅周辺（北口・南口。概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "しばさんのブログ https://www.naka-nihonbashi.com/smoking/smoking-motoyawata/",
+      "CLUB JT https://www.clubjt.jp/place/spot/pref-12/city-12002/area-1555/"
+    ]
+  },
+  {
+    "id": "gyotoku-station-area",
+    "name": "行徳駅周辺 喫煙所",
+    "lat": 35.6835,
+    "lng": 139.916,
+    "address": "千葉県市川市行徳駅前 行徳駅周辺（概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT https://www.clubjt.jp/place/spot/pref-12/city-12002/area-5900/",
+      "CLUB JT（市川市） https://www.clubjt.jp/place/spot/pref-12/city-12002/"
+    ]
+  },
+  {
+    "id": "shinurayasu-ekimae",
+    "name": "新浦安駅前 喫煙所",
+    "lat": 35.6478,
+    "lng": 139.916,
+    "address": "千葉県浦安市入船1丁目3 新浦安駅バスロータリー側（交番正面を直進しタクシーロータリー突き当たり）",
+    "type": "屋外",
+    "sources": [
+      "MEQQE https://meqqe.jp/spots/10141153",
+      "たばこすう https://www.town-coupon.com/shop_information/shinurayasu-ekimae",
+      "浦安に住みたい！ https://sumitai.ne.jp/urayasu/2015-08-31/21829.html"
+    ]
+  },
+  {
+    "id": "shinurayasu-mona-4f",
+    "name": "MONA新浦安（イオン新浦安）4階 喫煙所",
+    "lat": 35.6483,
+    "lng": 139.9148,
+    "address": "千葉県浦安市入船1-5-1 MONA新浦安 4階（7:30-22:00、日曜8:00-22:00）",
+    "type": "屋内（商業施設）",
+    "sources": [
+      "たばこすう https://www.town-coupon.com/shop_information/shinurayasu-aeon",
+      "浦安に住みたい！ https://sumitai.ne.jp/urayasu/2015-08-31/21829.html"
+    ]
+  },
+  {
+    "id": "lalaport-kashiwanoha-3f",
+    "name": "ららぽーと柏の葉 本館3階 屋外喫煙所",
+    "lat": 35.8935,
+    "lng": 139.9535,
+    "address": "千葉県柏市若柴178-4 ららぽーと柏の葉 本館3階「八菜」横（柏の葉キャンパス駅周辺に公共喫煙所なし）",
+    "type": "屋外（商業施設）",
+    "sources": [
+      "CLUB JT https://www.clubjt.jp/map/spot/1777014",
+      "ららぽーと柏の葉公式フロアガイド https://mitsui-shopping-park.com/lalaport/kashiwa/floor/"
+    ]
+  },
+  {
+    "id": "lalaport-kashiwanoha-1f",
+    "name": "ららぽーと柏の葉 本館1階 喫煙所（無印良品横）",
+    "lat": 35.8933,
+    "lng": 139.9532,
+    "address": "千葉県柏市若柴178-4 ららぽーと柏の葉 本館1階「無印良品」横",
+    "type": "屋内（商業施設）",
+    "sources": [
+      "CLUB JT https://www.clubjt.jp/map/spot/2103031",
+      "喫煙所マップ https://moqlog.jp/smoke/en/smoking-map001888/"
+    ]
+  },
+  {
+    "id": "otakanomori-sc-3f",
+    "name": "流山おおたかの森S・C 本館3階 喫煙所",
+    "lat": 35.8705,
+    "lng": 139.925,
+    "address": "千葉県流山市おおたかの森南1-5-1 流山おおたかの森S・C 本館3階（駅周辺は路上喫煙禁止・過料2000円）",
+    "type": "屋内（商業施設）",
+    "sources": [
+      "あつまれ 流山おおたかの森! https://atsuimori.com/sumai/kihon/tobacco/",
+      "しばさんのブログ https://www.naka-nihonbashi.com/smoking/otakanomori-sc/"
+    ]
+  },
+  {
+    "id": "otakanomori-lifegarden",
+    "name": "ライフガーデン流山おおたかの森 2階 喫煙所",
+    "lat": 35.872,
+    "lng": 139.927,
+    "address": "千葉県流山市おおたかの森東1-2-1 ライフガーデン流山おおたかの森 2階",
+    "type": "屋内（商業施設）",
+    "sources": [
+      "あつまれ 流山おおたかの森! https://atsuimori.com/sumai/kihon/tobacco/",
+      "CLUB JT https://www.clubjt.jp/place/spot/pref-12/city-12017/area-5207/"
+    ]
+  },
+  {
+    "id": "otakanomori-tx-grand-avenue",
+    "name": "TXグランドアベニューおおたかの森 2階 喫煙所",
+    "lat": 35.8718,
+    "lng": 139.924,
+    "address": "千葉県流山市西初石6丁目1823 TXグランドアベニューおおたかの森 2階",
+    "type": "屋内（商業施設）",
+    "sources": [
+      "あつまれ 流山おおたかの森! https://atsuimori.com/sumai/kihon/tobacco/",
+      "CLUB JT https://www.clubjt.jp/place/spot/pref-12/city-12017/area-5207/"
+    ]
+  },
+  {
+    "id": "kisarazu-nishiguchi",
+    "name": "木更津駅西口 デイリーヤマザキ喫煙スペース",
+    "lat": 35.381,
+    "lng": 139.9235,
+    "address": "千葉県木更津市富士見 木更津駅西口徒歩1分（5:00-24:30）",
+    "type": "屋内（店舗イートイン併設）",
+    "sources": [
+      "駅前喫煙所LaB。 https://ekme-pk2.hateblo.jp/entry/2020/06/03/184023",
+      "木更津市公式（受動喫煙対策について） https://www.city.kisarazu.lg.jp/soshiki/kenkokodomo/kenkosuishin/1/1072.html"
+    ]
+  },
+  {
+    "id": "aeonmall-kisarazu",
+    "name": "イオンモール木更津 1階 屋外喫煙所",
+    "lat": 35.3838,
+    "lng": 139.9155,
+    "address": "千葉県木更津市築地1-4 イオンモール木更津 1階モール東入口[A2]付近（概算位置）",
+    "type": "屋外（商業施設）",
+    "sources": [
+      "イオンモール木更津公式（施設＆サービス案内） https://kisarazu-aeonmall.com/special/lists/setsubi",
+      "イオンモール木更津公式（館内喫煙所開放のお知らせ） https://kisarazu-aeonmall.com/news/information/400"
+    ]
+  },
+  {
+    "id": "goi-sunplaza",
+    "name": "サンプラザ市原 連絡通路 喫煙所（五井駅前）",
+    "lat": 35.5178,
+    "lng": 140.0895,
+    "address": "千葉県市原市五井中央 サンプラザ市原 ペデストリアンデッキ連絡通路（五井駅前）",
+    "type": "屋外（デッキ上）",
+    "sources": [
+      "CLUB JT（サンプラザ市原） https://www.clubjt.jp/place/spot/pref-12/city-12016/area-16594/",
+      "CLUB JT（五井駅） https://www.clubjt.jp/place/spot/pref-12/city-12016/area-1867/"
+    ]
+  },
+  {
+    "id": "chiba-newtown-chuo",
+    "name": "千葉ニュータウン中央駅周辺 喫煙所",
+    "lat": 35.796,
+    "lng": 140.149,
+    "address": "千葉県印西市中央北 千葉ニュータウン中央駅周辺（概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT https://www.clubjt.jp/place/spot/pref-12/city-12028/area-5469/",
+      "CLUB JT（印西市） https://www.clubjt.jp/place/spot/pref-12/city-12028/"
+    ]
+  },
+  {
+    "id": "choshi-station-area",
+    "name": "銚子駅周辺 喫煙所",
+    "lat": 35.7345,
+    "lng": 140.8265,
+    "address": "千葉県銚子市西芝町 銚子駅周辺（銚子観光協会がたばこスポットマップを公開）",
+    "type": "概算位置",
+    "sources": [
+      "銚子観光協会（銚子エリアたばこスポットマップ） https://www.choshikanko.com/_wp/wp-content/uploads/2021/03/",
+      "CLUB JT https://www.clubjt.jp/place/spot/pref-12/city-12001/area-1597/"
+    ]
+  },
+  {
+    "id": "tateyama-station-area",
+    "name": "館山駅周辺 喫煙所",
+    "lat": 34.9955,
+    "lng": 139.869,
+    "address": "千葉県館山市北条 館山駅周辺（概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT https://www.clubjt.jp/place/spot/pref-12/city-12004/area-1885/",
+      "JR東日本（駅の禁煙・喫煙について） https://jreastfaq.jreast.co.jp/faq/show/1388"
+    ]
+  },
+  {
+    "id": "abiko-station-area",
+    "name": "我孫子駅周辺 喫煙所",
+    "lat": 35.8745,
+    "lng": 140.028,
+    "address": "千葉県我孫子市本町 我孫子駅周辺（概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "駅前喫煙所LaB。 https://ekme-pk2.hateblo.jp/entry/2017/11/07/150053",
+      "CLUB JT https://www.clubjt.jp/place/spot/pref-12/city-12019/area-1704/"
+    ]
+  },
+  {
+    "id": "katsutadai-station-area",
+    "name": "勝田台駅周辺 喫煙所",
+    "lat": 35.7215,
+    "lng": 140.171,
+    "address": "千葉県八千代市勝田台 勝田台駅周辺（駅構内に喫煙所なし・周辺店舗の喫煙スペース）",
+    "type": "概算位置",
+    "sources": [
+      "さがすもーく https://sagasmo.com/column/%E5%8B%9D%E7%94%B0%E5%8F%B0%E9%A7%85%E5%91%A8%E8%BE%BA%E3%81%AE%E5%96%AB%E7%85%99%E6%89%80%E3%82%92%E7%B4%B9%E4%BB%8B",
+      "八千代市公式（路上喫煙の防止について） https://www.city.yachiyo.lg.jp/soshiki/11/2102.html"
+    ]
+  },
+  {
+    "id": "narita-station-area",
+    "name": "成田駅周辺 喫煙所（成田山表参道）",
+    "lat": 35.7745,
+    "lng": 140.3185,
+    "address": "千葉県成田市花崎町 JR成田駅・京成成田駅周辺（成田山表参道エリア。概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT（成田駅） https://www.clubjt.jp/place/spot/pref-12/city-12009/area-1914/",
+      "さがすもーく https://sagasmo.com/search/%E6%88%90%E7%94%B0%E5%B8%82/%E6%88%90%E7%94%B0"
+    ]
+  },
+  {
+    "id": "mobara-station-area",
+    "name": "茂原駅周辺 喫煙所",
+    "lat": 35.428,
+    "lng": 140.29,
+    "address": "千葉県茂原市町保 茂原駅周辺（概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "喫煙所マップ https://moqlog.jp/smoke/area/area01/pref01_03/munic03-02/sta03-11/",
+      "CLUB JT https://www.clubjt.jp/place/spot/pref-12/"
     ]
   }
 ]
