@@ -236,7 +236,7 @@ function addSpotAtMapCenter() {
     lng: center.lng,
     address: "",
     type: "ユーザー登録",
-    source: "自分で追加",
+    sources: ["自分で追加"],
   };
   const userSpots = loadUserSpots();
   userSpots.push(spot);
