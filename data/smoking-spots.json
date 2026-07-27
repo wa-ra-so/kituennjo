@@ -169,5 +169,140 @@
     "address": "愛知県名古屋市中村区名駅 太閤通口噴水南側（名古屋市設置）",
     "type": "屋外",
     "source": "バス比較なび https://www.bushikaku.net/article/46278/"
+  },
+  {
+    "id": "sapporo-kitaguchi-rotary",
+    "name": "札幌駅北口ロータリー指定喫煙所",
+    "lat": 43.0698,
+    "lng": 141.3505,
+    "address": "北海道札幌市北区北6条西 札幌駅北口ロータリー バス乗り場付近",
+    "type": "屋外（市指定）",
+    "source": "北海道ローカルマガジン https://npofuren.jp/smoking-spot-sapporo/"
+  },
+  {
+    "id": "sapporo-stellarplace",
+    "name": "札幌ステラプレイス 喫煙室",
+    "lat": 43.0678,
+    "lng": 141.3509,
+    "address": "北海道札幌市中央区北5条西2丁目 札幌ステラプレイス（東館・西館各フロア）",
+    "type": "屋内（商業施設）",
+    "source": "北海道ローカルマガジン https://npofuren.jp/smoking-spot-sapporo/"
+  },
+  {
+    "id": "sapporo-apia",
+    "name": "札幌アピア 喫煙所（アイマジック隣）",
+    "lat": 43.0680,
+    "lng": 141.3495,
+    "address": "北海道札幌市中央区北5条西3丁目 札幌アピア ウエスト地下1階",
+    "type": "屋内（商業施設）",
+    "source": "北海道ローカルマガジン https://npofuren.jp/smoking-spot-sapporo/"
+  },
+  {
+    "id": "sendai-nishiguchi",
+    "name": "仙台駅西口喫煙所",
+    "lat": 38.2600,
+    "lng": 140.8813,
+    "address": "宮城県仙台市青葉区中央1丁目1 仙台駅西口バスプール付近",
+    "type": "屋外（24時間）",
+    "source": "仙台南つうしん https://sendaiminami-tusin.com/sendai-kituen/"
+  },
+  {
+    "id": "sendai-higashiguchi",
+    "name": "仙台駅東口喫煙所",
+    "lat": 38.2610,
+    "lng": 140.8840,
+    "address": "宮城県仙台市宮城野区榴岡 仙台駅東口",
+    "type": "屋外",
+    "source": "NAVITIME https://www.navitime.co.jp/poi?spot=02022-1424638"
+  },
+  {
+    "id": "kyoto-karasuma-tower",
+    "name": "京都駅烏丸口 京都タワー前 喫煙所",
+    "lat": 34.9875,
+    "lng": 135.7590,
+    "address": "京都府京都市下京区 京都駅烏丸口（北側）京都タワー前横断歩道先",
+    "type": "屋外",
+    "source": "京都駅チャンネル http://kyoto-rys.com/facility/smoking/"
+  },
+  {
+    "id": "kyoto-hachijoguchi-terrace",
+    "name": "京都駅八条口 南北自由通路テラス 喫煙所",
+    "lat": 34.9840,
+    "lng": 135.7580,
+    "address": "京都府京都市南区東九条 京都駅八条口（南側）2階南北自由通路南端テラス",
+    "type": "屋外",
+    "source": "京都駅チャンネル http://kyoto-rys.com/facility/smoking/"
+  },
+  {
+    "id": "kyoto-shinkansen-hachijohigashi",
+    "name": "京都駅新幹線コンコース 八条東口 喫煙室",
+    "lat": 34.9847,
+    "lng": 135.7600,
+    "address": "京都府京都市南区東九条 京都駅新幹線八条東口待合室横",
+    "type": "屋内（駅構内）",
+    "source": "京都駅チャンネル http://kyoto-rys.com/facility/smoking/shinkansen/"
+  },
+  {
+    "id": "hakata-amu-plaza-b1",
+    "name": "アミュプラザ博多 地下1階 喫煙所",
+    "lat": 33.5895,
+    "lng": 130.4200,
+    "address": "福岡県福岡市博多区博多駅中央街1-1 アミュプラザ博多 地下1階トイレ横",
+    "type": "屋内（商業施設）",
+    "source": "マチしる福岡 https://fukuoka.machishiru.jp/kiji-smokingarea-hakatast/"
+  },
+  {
+    "id": "hakata-kitte-b1",
+    "name": "KITTE博多 B1階 喫煙所",
+    "lat": 33.5898,
+    "lng": 130.4215,
+    "address": "福岡県福岡市博多区博多駅中央街9-1 KITTE博多 地下1階トイレ横",
+    "type": "屋内（商業施設・11-14時は禁煙）",
+    "source": "マチしる福岡 https://fukuoka.machishiru.jp/kiji-smokingarea-hakatast/"
+  },
+  {
+    "id": "hakata-shinkansen-platform",
+    "name": "博多駅新幹線ホーム 屋外喫煙所",
+    "lat": 33.5900,
+    "lng": 130.4225,
+    "address": "福岡県福岡市博多区博多駅中央街 新幹線11-16番ホーム上",
+    "type": "屋外（駅構内）",
+    "source": "dr-stick https://dr-stick.shop/tips/column/hakata-station-smoking/"
+  },
+  {
+    "id": "hiroshima-shinkansenguchi",
+    "name": "広島駅新幹線口 喫煙所",
+    "lat": 34.3978,
+    "lng": 132.4752,
+    "address": "広島県広島市南区松原町 広島駅新幹線口周辺",
+    "type": "屋外（概算位置）",
+    "source": "広島市公式 https://www.city.hiroshima.lg.jp/living/gomi-kankyo/1021281/1037470/1024206.html"
+  },
+  {
+    "id": "naha-airport-3f-checkin",
+    "name": "那覇空港 3階チェックインロビー 喫煙所",
+    "lat": 26.1960,
+    "lng": 127.6460,
+    "address": "沖縄県那覇市鏡水150 那覇空港 3階チェックインロビー（ANAカウンター付近）",
+    "type": "屋内（空港）",
+    "source": "How To TRAICY https://howto.traicy.com/oka-terminal-smoking-area/"
+  },
+  {
+    "id": "naha-airport-2f-departure",
+    "name": "那覇空港 2階出発ロビー国内線 喫煙所",
+    "lat": 26.1955,
+    "lng": 127.6455,
+    "address": "沖縄県那覇市鏡水150 那覇空港 2階出発ロビー国内線エリア",
+    "type": "屋内（空港）",
+    "source": "How To TRAICY https://howto.traicy.com/oka-terminal-smoking-area/"
+  },
+  {
+    "id": "takamatsu-station-area",
+    "name": "高松駅周辺 喫煙所",
+    "lat": 34.3557,
+    "lng": 134.0507,
+    "address": "香川県高松市浜ノ町 高松駅周辺（概算位置）",
+    "type": "概算位置",
+    "source": "CLUB JT https://www.clubjt.jp/place/spot/pref-37/city-37001/area-4228/"
   }
 ]
