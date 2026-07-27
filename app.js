@@ -268,10 +268,20 @@ let isDragging = false;
 
 function computeSheetHeights() {
   const vh = window.innerHeight;
+  const half = Math.round(vh * 0.5);
+
+  // Leave room so the floating buttons (which sit just above the sheet)
+  // never climb up far enough to overlap the title/segmented-control panel.
+  const titlePanel = document.querySelector(".title-panel");
+  const titleBottom = titlePanel ? titlePanel.getBoundingClientRect().bottom : 0;
+  const fabStackHeight = 44 * 2 + 12; // two 44px buttons + gap
+  const margin = 32; // breathing room above the title panel and below the fabs
+  const maxFullBySpace = vh - titleBottom - fabStackHeight - margin;
+
   sheetHeights = {
     peek: 140,
-    half: Math.round(vh * 0.5),
-    full: Math.round(vh * 0.82),
+    half,
+    full: Math.max(half + 40, Math.min(Math.round(vh * 0.82), maxFullBySpace)),
   };
 }
 
