@@ -69,14 +69,44 @@ async function loadSeedSpots() {
   }
 }
 
-function initMap() {
-  map = L.map("map", { zoomControl: false }).setView(DEFAULT_CENTER, 15);
-  L.control.zoom({ position: "bottomleft" }).addTo(map);
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: "&copy; OpenStreetMap contributors",
-    maxZoom: 19,
+// CARTO basemaps serve @2x tiles via the {r} placeholder, so the map stays
+// sharp on high-DPI phone screens instead of looking upscaled.
+const TILE_ATTRIBUTION =
+  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
+const TILE_URL = {
+  light: "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+  dark: "https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png",
+};
+
+let tileLayer = null;
+
+function currentTheme() {
+  return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+}
+
+function applyTileLayer(theme) {
+  if (tileLayer) map.removeLayer(tileLayer);
+  tileLayer = L.tileLayer(TILE_URL[theme], {
+    attribution: TILE_ATTRIBUTION,
+    subdomains: "abcd",
+    maxZoom: 20,
+    detectRetina: true, // fills {r} with "@2x" on high-DPI displays
   }).addTo(map);
+  tileLayer.setZIndex(0);
+}
+
+function initMap() {
+  map = L.map("map", { zoomControl: false, zoomSnap: 0.5 }).setView(DEFAULT_CENTER, 15);
+  L.control.zoom({ position: "bottomleft" }).addTo(map);
+  applyTileLayer(currentTheme());
   markerLayer.addTo(map);
+
+  const darkQuery = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)");
+  if (darkQuery && darkQuery.addEventListener) {
+    darkQuery.addEventListener("change", (e) => applyTileLayer(e.matches ? "dark" : "light"));
+  }
 }
 
 function pinIcon(isUserAdded) {
@@ -193,36 +223,89 @@ function updateUserMarker(lat, lng, accuracy) {
   }
 }
 
+// GPS accuracy handling ------------------------------------------------------
+// A phone's first fix is often a coarse Wi-Fi/cell estimate (hundreds of
+// metres) that gets refined over the next few seconds as the GPS warms up.
+// We keep watching and only accept a reading when it is at least as good as
+// the best one we already have, so a stale coarse fix can never clobber a
+// sharp one.
+
+let bestAccuracy = Infinity;
+let lastFixAt = 0;
+let watchId = null;
+let pendingRecenter = false;
+
+const STALE_FIX_MS = 15000; // after this, accept a worse reading (user moved)
+
+function describeAccuracy(accuracy) {
+  if (accuracy <= 20) return "";
+  if (accuracy <= 100) return `位置精度 約${Math.round(accuracy)}m`;
+  return `位置精度が粗いです（約${Math.round(accuracy)}m）。屋外や窓際で再取得すると改善します`;
+}
+
+function onPosition(pos) {
+  const { latitude, longitude, accuracy } = pos.coords;
+  const now = Date.now();
+  const isStale = now - lastFixAt > STALE_FIX_MS;
+
+  // Reject a reading that is meaningfully worse than our best recent fix.
+  if (accuracy > bestAccuracy * 1.5 && !isStale) return;
+
+  bestAccuracy = isStale ? accuracy : Math.min(bestAccuracy, accuracy);
+  lastFixAt = now;
+
+  updateUserMarker(latitude, longitude, accuracy);
+
+  if (pendingRecenter) {
+    // Zoom in tighter when the fix is sharp, stay wide when it is fuzzy.
+    const zoom = accuracy <= 30 ? 17 : accuracy <= 150 ? 16 : 15;
+    map.setView([latitude, longitude], zoom);
+    pendingRecenter = false;
+  }
+
+  setStatus(describeAccuracy(accuracy));
+  renderList();
+  renderMarkers(allSpots);
+}
+
+function onPositionError(err) {
+  const msg =
+    err.code === err.PERMISSION_DENIED
+      ? "位置情報の利用が許可されていません。ブラウザの設定から許可してください。"
+      : err.code === err.POSITION_UNAVAILABLE
+      ? "位置情報を取得できませんでした。電波の届く場所で再度お試しください。"
+      : "位置情報の取得がタイムアウトしました。";
+  setStatus(msg, true);
+}
+
 function locateUser(recenter) {
   if (!navigator.geolocation) {
     setStatus("この端末は位置情報に対応していません。", true);
     return;
   }
-  setStatus("現在地を取得中…");
-  navigator.geolocation.getCurrentPosition(
-    (pos) => {
-      const { latitude, longitude, accuracy } = pos.coords;
-      updateUserMarker(latitude, longitude, accuracy);
-      if (recenter) map.setView([latitude, longitude], 16);
-      setStatus("");
-      renderList();
-      renderMarkers(allSpots);
-    },
-    (err) => {
-      setStatus("位置情報を取得できませんでした：" + err.message, true);
-    },
-    { enableHighAccuracy: true, timeout: 10000, maximumAge: 5000 }
-  );
 
-  navigator.geolocation.watchPosition(
-    (pos) => {
-      const { latitude, longitude, accuracy } = pos.coords;
-      updateUserMarker(latitude, longitude, accuracy);
-      renderList();
-    },
-    () => {},
-    { enableHighAccuracy: true, maximumAge: 10000 }
-  );
+  if (recenter) {
+    pendingRecenter = true;
+    // Treat an explicit "locate me" tap as a fresh start so a better fix can
+    // win even if we are currently holding a sharp but outdated one.
+    bestAccuracy = Infinity;
+    setStatus("現在地を取得中…");
+  }
+
+  // One watcher for the whole session — repeated taps must not stack watchers.
+  if (watchId === null) {
+    watchId = navigator.geolocation.watchPosition(onPosition, onPositionError, {
+      enableHighAccuracy: true,
+      timeout: 20000,
+      maximumAge: 0, // never hand us a cached fix
+    });
+  } else if (recenter) {
+    navigator.geolocation.getCurrentPosition(onPosition, onPositionError, {
+      enableHighAccuracy: true,
+      timeout: 20000,
+      maximumAge: 0,
+    });
+  }
 }
 
 function addSpotAtMapCenter() {
@@ -258,13 +341,18 @@ function setupSegmentedControl() {
   });
 }
 
-// ---------- Bottom sheet drag (peek / half / full) ----------
+// ---------- Bottom sheet drag (collapsed / peek / half / full) ----------
 
-let sheetHeights = { peek: 140, half: 0, full: 0 };
+// "collapsed" leaves only the grab handle on screen so the map is almost
+// full-height; drag it back up to bring the list in.
+const COLLAPSED_HEIGHT = 34;
+
+let sheetHeights = { collapsed: COLLAPSED_HEIGHT, peek: 150, half: 0, full: 0 };
 let sheetState = "half";
 let dragStartY = 0;
 let dragStartHeight = 0;
 let isDragging = false;
+let dragMoved = false;
 
 function computeSheetHeights() {
   const vh = window.innerHeight;
@@ -279,7 +367,8 @@ function computeSheetHeights() {
   const maxFullBySpace = vh - titleBottom - fabStackHeight - margin;
 
   sheetHeights = {
-    peek: 140,
+    collapsed: COLLAPSED_HEIGHT,
+    peek: 150,
     half,
     full: Math.max(half + 40, Math.min(Math.round(vh * 0.82), maxFullBySpace)),
   };
@@ -294,11 +383,12 @@ function setSheetState(state) {
   sheetState = state;
   sheet.classList.remove("dragging");
   fabStack.classList.remove("dragging");
+  sheet.classList.toggle("collapsed", state === "collapsed");
   applySheetHeight(sheetHeights[state]);
 }
 
 function setSheetHeightPx(px) {
-  const clamped = Math.min(sheetHeights.full, Math.max(sheetHeights.peek, px));
+  const clamped = Math.min(sheetHeights.full, Math.max(sheetHeights.collapsed, px));
   applySheetHeight(clamped);
 }
 
@@ -322,6 +412,7 @@ function setupSheetDrag() {
 
   const onPointerDown = (e) => {
     isDragging = true;
+    dragMoved = false;
     dragStartY = e.clientY;
     dragStartHeight = sheet.getBoundingClientRect().height;
     sheet.classList.add("dragging");
@@ -332,14 +423,23 @@ function setupSheetDrag() {
   const onPointerMove = (e) => {
     if (!isDragging) return;
     const delta = dragStartY - e.clientY;
+    if (Math.abs(delta) > 4) dragMoved = true;
     setSheetHeightPx(dragStartHeight + delta);
   };
 
   const onPointerUp = () => {
     if (!isDragging) return;
     isDragging = false;
-    const currentPx = sheet.getBoundingClientRect().height;
-    setSheetState(nearestState(currentPx));
+
+    // A tap (no real movement) cycles the sheet instead of snapping back.
+    if (!dragMoved) {
+      const order = ["collapsed", "peek", "half", "full"];
+      const next = order[(order.indexOf(sheetState) + 1) % order.length];
+      setSheetState(next);
+      return;
+    }
+
+    setSheetState(nearestState(sheet.getBoundingClientRect().height));
   };
 
   sheetHandle.addEventListener("pointerdown", onPointerDown);
