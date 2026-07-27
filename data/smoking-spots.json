@@ -304,5 +304,329 @@
     "address": "香川県高松市浜ノ町 高松駅周辺（概算位置）",
     "type": "概算位置",
     "source": "CLUB JT https://www.clubjt.jp/place/spot/pref-37/city-37001/area-4228/"
+  },
+  {
+    "id": "aomori-station-area",
+    "name": "青森駅周辺 喫煙所",
+    "lat": 40.8244,
+    "lng": 140.7400,
+    "address": "青森県青森市柳川 青森駅周辺（概算位置）",
+    "type": "概算位置",
+    "source": "さがすもーく https://sagasmo.com/search/%E9%9D%92%E6%A3%AE%E5%B8%82/%E9%9D%92%E6%A3%AE"
+  },
+  {
+    "id": "morioka-nishiguchi-marios",
+    "name": "盛岡駅西口 マリオス付近 喫煙所",
+    "lat": 39.7010,
+    "lng": 141.1340,
+    "address": "岩手県盛岡市盛岡駅西通 マリオス付近",
+    "type": "屋外",
+    "source": "JREメディア https://media.jreast.co.jp/articles/5709"
+  },
+  {
+    "id": "akita-shinkansen-platform",
+    "name": "秋田駅新幹線ホーム 喫煙所",
+    "lat": 39.7186,
+    "lng": 140.1024,
+    "address": "秋田県秋田市中通 秋田駅新幹線11・12番線ホーム",
+    "type": "屋内（駅構内）",
+    "source": "JREメディア https://media.jreast.co.jp/articles/623"
+  },
+  {
+    "id": "yamagata-higashiguchi-trailer",
+    "name": "山形駅東口 トレーラーハウス型喫煙所",
+    "lat": 38.2415,
+    "lng": 140.3320,
+    "address": "山形県山形市香澄町 山形駅東口",
+    "type": "屋外（コンテナ型）",
+    "source": "さがすもーく https://sagasmo.com/column/%E5%B1%B1%E5%BD%A2%E9%A7%85%E5%91%A8%E8%BE%BA%E3%81%AE%E5%96%AB%E7%85%99%E6%89%80%E3%82%92%E7%B4%B9%E4%BB%8B"
+  },
+  {
+    "id": "fukushima-nishiguchi",
+    "name": "福島駅西口 指定喫煙所",
+    "lat": 37.7500,
+    "lng": 140.4660,
+    "address": "福島県福島市栄町 福島駅西口正面",
+    "type": "屋外（市指定）",
+    "source": "福島市公式 https://www.city.fukushima.fukushima.jp/soshiki/9/1047/1/2/15352.html"
+  },
+  {
+    "id": "mito-kitaguchi-deck",
+    "name": "水戸駅前北口デッキ 喫煙所",
+    "lat": 36.3660,
+    "lng": 140.4715,
+    "address": "茨城県水戸市宮町 水戸駅前北口デッキ「お休み処」",
+    "type": "屋外",
+    "source": "tabigo-media https://tabigo-media.net/mitostationsquare-smokingarea/"
+  },
+  {
+    "id": "utsunomiya-higashiguchi",
+    "name": "宇都宮駅東口自由通路下 喫煙所",
+    "lat": 36.5555,
+    "lng": 139.8990,
+    "address": "栃木県宇都宮市川向町 宇都宮駅東口自由通路階下",
+    "type": "屋外",
+    "source": "MEQQE https://meqqe.jp/spots/10041050"
+  },
+  {
+    "id": "maebashi-station-area",
+    "name": "前橋駅周辺 喫煙所",
+    "lat": 36.3891,
+    "lng": 139.0733,
+    "address": "群馬県前橋市表町 前橋駅周辺（概算位置）",
+    "type": "概算位置",
+    "source": "CLUB JT https://www.clubjt.jp/place/spot/pref-10/city-10001/area-2145/"
+  },
+  {
+    "id": "omiya-higashiguchi",
+    "name": "大宮駅東口 さいたま市指定喫煙場所",
+    "lat": 35.9065,
+    "lng": 139.6255,
+    "address": "埼玉県さいたま市大宮区大門町1-74",
+    "type": "屋外（市指定）",
+    "source": "NAVITIME https://www.navitime.co.jp/poi?spot=02022-1424639"
+  },
+  {
+    "id": "chiba-perie",
+    "name": "ペリエ千葉 喫煙所（5F・6F）",
+    "lat": 35.6070,
+    "lng": 140.1230,
+    "address": "千葉県千葉市中央区新千葉 ペリエ千葉 5階・6階",
+    "type": "屋内（商業施設）",
+    "source": "dr-stick https://dr-stick.shop/tips/column/chiba-station-smoking/"
+  },
+  {
+    "id": "niigata-station-area",
+    "name": "新潟駅周辺 喫煙所",
+    "lat": 37.9161,
+    "lng": 139.0364,
+    "address": "新潟県新潟市中央区花園 新潟駅周辺（概算位置）",
+    "type": "概算位置",
+    "source": "CLUB JT https://www.clubjt.jp/place/spot/pref-15/city-15022/area-2317/"
+  },
+  {
+    "id": "toyama-station-area",
+    "name": "富山駅周辺 喫煙所",
+    "lat": 36.6953,
+    "lng": 137.2137,
+    "address": "富山県富山市明輪町 富山駅周辺（概算位置）",
+    "type": "概算位置",
+    "source": "CLUB JT https://www.clubjt.jp/place/spot/pref-16/city-16001/area-2681/"
+  },
+  {
+    "id": "kanazawa-nishiguchi",
+    "name": "金沢駅西口（金沢港口） 屋外喫煙所",
+    "lat": 36.5775,
+    "lng": 136.6460,
+    "address": "石川県金沢市西念 金沢駅西口（金沢港口）",
+    "type": "屋外（市指定）",
+    "source": "石川ジャーニー https://www.machisen.jp/archives/130"
+  },
+  {
+    "id": "fukui-koka",
+    "name": "福井駅高架下 屋内喫煙所",
+    "lat": 36.0615,
+    "lng": 136.2225,
+    "address": "福井県福井市中央 福井駅高架下公衆トイレ隣接",
+    "type": "屋内（市設置）",
+    "source": "福井市公式 https://www.city.fukui.lg.jp/kurasi/mati/sigaitikassei/p025672.html"
+  },
+  {
+    "id": "kofu-minamiguchi",
+    "name": "甲府駅南口 指定喫煙所（信玄像付近）",
+    "lat": 35.6635,
+    "lng": 138.5685,
+    "address": "山梨県甲府市丸の内 甲府駅南口広場 武田信玄像付近",
+    "type": "屋外（市指定）",
+    "source": "てくてく甲府 https://11340blog.com/kofu-smoking"
+  },
+  {
+    "id": "nagano-higashiguchi",
+    "name": "長野駅東口ロータリー 喫煙所",
+    "lat": 36.6440,
+    "lng": 138.1895,
+    "address": "長野県長野市栗田 長野駅東口ロータリー駐輪場手前",
+    "type": "屋外",
+    "source": "さがすもーく https://sagasmo.com/column/%E9%95%B7%E9%87%8E%E9%A7%85%E5%91%A8%E8%BE%BA%E3%81%AE%E5%96%AB%E7%85%99%E6%89%80%E3%82%92%E7%B4%B9%E4%BB%8B"
+  },
+  {
+    "id": "gifu-kitaguchi",
+    "name": "岐阜駅北口駅前広場 喫煙所",
+    "lat": 35.4120,
+    "lng": 136.7605,
+    "address": "岐阜県岐阜市橋本町 岐阜駅北口駅前広場",
+    "type": "屋外",
+    "source": "MEQQE https://meqqe.jp/spots/10041216"
+  },
+  {
+    "id": "shizuoka-kitaguchi",
+    "name": "静岡駅北口広場 喫煙所",
+    "lat": 34.9765,
+    "lng": 138.3825,
+    "address": "静岡県静岡市葵区黒金町49地先 静岡駅北口広場",
+    "type": "屋外（24時間）",
+    "source": "NAVITIME https://www.navitime.co.jp/poi?spot=02022-1424660"
+  },
+  {
+    "id": "tsu-station-area",
+    "name": "津駅周辺 喫煙所",
+    "lat": 34.7186,
+    "lng": 136.5075,
+    "address": "三重県津市羽所町 津駅周辺（概算位置）",
+    "type": "概算位置",
+    "source": "CLUB JT https://www.clubjt.jp/place/spot/pref-24/city-24001/area-2936/"
+  },
+  {
+    "id": "otsu-station-area",
+    "name": "大津駅周辺 喫煙所",
+    "lat": 35.0037,
+    "lng": 135.8686,
+    "address": "滋賀県大津市春日町 大津駅周辺（概算位置）",
+    "type": "概算位置",
+    "source": "CLUB JT https://www.clubjt.jp/place/spot/pref-25/city-25001/area-3028/"
+  },
+  {
+    "id": "sannomiya-higashiguchi",
+    "name": "JR三ノ宮駅東口高架下 喫煙所",
+    "lat": 34.6955,
+    "lng": 135.1975,
+    "address": "兵庫県神戸市中央区雲井通 JR三ノ宮駅東口高架下沿い",
+    "type": "屋内（民間）",
+    "source": "神戸ジャーナル https://kobe-journal.com/archives/3648822498.html"
+  },
+  {
+    "id": "nara-kintetsu-area",
+    "name": "近鉄奈良駅周辺 喫煙所",
+    "lat": 34.6851,
+    "lng": 135.8264,
+    "address": "奈良県奈良市東向中町 近鉄奈良駅周辺（駅構内には設置なし・概算位置）",
+    "type": "概算位置（駅構内は禁煙）",
+    "source": "ソラニ満ツ https://naramati-nararaku.jp/kituenbasyo/"
+  },
+  {
+    "id": "wakayama-nishiguchi",
+    "name": "JR和歌山駅西口広場 喫煙所",
+    "lat": 34.2340,
+    "lng": 135.1700,
+    "address": "和歌山県和歌山市美園町5-13-2",
+    "type": "屋外",
+    "source": "MEQQE https://meqqe.jp/spots/10041344"
+  },
+  {
+    "id": "tottori-rotary",
+    "name": "鳥取駅前ロータリー 喫煙所",
+    "lat": 35.5015,
+    "lng": 134.2395,
+    "address": "鳥取県鳥取市東品治町 鳥取駅前ロータリー",
+    "type": "屋外",
+    "source": "4travel https://4travel.jp/dm_shisetsu_tips/12847213"
+  },
+  {
+    "id": "matsue-station-area",
+    "name": "松江駅周辺 喫煙所",
+    "lat": 35.4723,
+    "lng": 133.0505,
+    "address": "島根県松江市朝日町 松江駅周辺（概算位置）",
+    "type": "概算位置",
+    "source": "CLUB JT https://www.clubjt.jp/place/spot/pref-32/city-32001/area-3706/"
+  },
+  {
+    "id": "okayama-higashiguchi",
+    "name": "岡山駅東口噴水広場前 喫煙所",
+    "lat": 34.6660,
+    "lng": 133.9200,
+    "address": "岡山県岡山市北区駅元町1-1",
+    "type": "屋外",
+    "source": "MEQQE https://meqqe.jp/spots/10041400"
+  },
+  {
+    "id": "shinyamaguchi-shinkansen",
+    "name": "新山口駅新幹線ホーム 喫煙所",
+    "lat": 34.1006,
+    "lng": 131.3924,
+    "address": "山口県山口市小郡下郷1294 新山口駅新幹線ホーム",
+    "type": "屋内（駅構内）",
+    "source": "MEQQE https://meqqe.jp/spots/10041431"
+  },
+  {
+    "id": "tokushima-ekimae",
+    "name": "徳島駅前広場 喫煙所",
+    "lat": 34.0708,
+    "lng": 134.5555,
+    "address": "徳島県徳島市寺島本町東3丁目 空港リムジンバスのりば付近",
+    "type": "屋外",
+    "source": "MEQQE https://meqqe.jp/spots/10041447"
+  },
+  {
+    "id": "matsuyama-station-area",
+    "name": "松山駅周辺 喫煙所",
+    "lat": 33.8455,
+    "lng": 132.7657,
+    "address": "愛媛県松山市南江戸 松山駅周辺（概算位置）",
+    "type": "概算位置",
+    "source": "CLUB JT https://www.clubjt.jp/place/spot/pref-38/city-38001/area-4376/"
+  },
+  {
+    "id": "kochi-station-area",
+    "name": "高知駅周辺 喫煙所",
+    "lat": 33.5597,
+    "lng": 133.5311,
+    "address": "高知県高知市栄田町 高知駅周辺（概算位置）",
+    "type": "概算位置",
+    "source": "CLUB JT https://www.clubjt.jp/place/spot/pref-39/city-39001/area-4200/"
+  },
+  {
+    "id": "saga-buscenter",
+    "name": "佐賀駅バスセンター内 喫煙所",
+    "lat": 33.2630,
+    "lng": 130.3005,
+    "address": "佐賀県佐賀市駅前中央1丁目12 佐賀駅バスセンター1番のりば",
+    "type": "屋内",
+    "source": "MEQQE https://meqqe.jp/spots/10041462"
+  },
+  {
+    "id": "nagasaki-station-area",
+    "name": "長崎駅周辺 喫煙所",
+    "lat": 32.7503,
+    "lng": 129.8669,
+    "address": "長崎県長崎市尾上町 長崎駅周辺（概算位置）",
+    "type": "概算位置",
+    "source": "CLUB JT https://www.clubjt.jp/place/spot/pref-42/city-42001/area-4580/"
+  },
+  {
+    "id": "kumamoto-station-area",
+    "name": "熊本駅周辺 喫煙所",
+    "lat": 32.7898,
+    "lng": 130.7060,
+    "address": "熊本県熊本市西区春日 熊本駅周辺（概算位置）",
+    "type": "概算位置",
+    "source": "CLUB JT https://www.clubjt.jp/place/spot/pref-43/city-99999/area-4514/"
+  },
+  {
+    "id": "oita-shitei",
+    "name": "大分駅前指定喫煙所",
+    "lat": 33.2385,
+    "lng": 131.6110,
+    "address": "大分県大分市末広町1丁目",
+    "type": "屋外（市指定）",
+    "source": "MEQQE https://meqqe.jp/spots/10041471"
+  },
+  {
+    "id": "miyazaki-station-area",
+    "name": "宮崎駅周辺 喫煙所",
+    "lat": 31.9146,
+    "lng": 131.4239,
+    "address": "宮崎県宮崎市錦町 宮崎駅周辺（概算位置）",
+    "type": "概算位置",
+    "source": "CLUB JT https://www.clubjt.jp/place/spot/pref-45/city-45001/area-4669/"
+  },
+  {
+    "id": "kagoshimachuo-nishiguchi",
+    "name": "鹿児島中央駅西口ロータリー 喫煙所",
+    "lat": 31.5805,
+    "lng": 130.5395,
+    "address": "鹿児島県鹿児島市中央町 鹿児島中央駅西口ロータリー付近",
+    "type": "屋外",
+    "source": "kagoshima.website https://kagoshima.website/?p=63"
   }
 ]
