@@ -1,92 +1,173 @@
 [
   {
-    "id": "seed-tokyo-1",
-    "name": "東京駅周辺 喫煙所",
-    "lat": 35.6812,
-    "lng": 139.7671,
-    "address": "東京都千代田区丸の内 東京駅周辺",
-    "type": "屋外",
-    "source": "公開情報を基にした概算位置"
+    "id": "tokyo-yaesu-gransta",
+    "name": "グランスタ八重洲 喫煙所",
+    "lat": 35.6803,
+    "lng": 139.7695,
+    "address": "東京都千代田区丸の内1丁目 東京駅八重洲地下1階",
+    "type": "屋内（駅構内）",
+    "source": "JREメディア https://media.jreast.co.jp/articles/652"
   },
   {
-    "id": "seed-shinjuku-1",
-    "name": "新宿駅東口 喫煙所",
+    "id": "tokyo-yaesu-underground-north",
+    "name": "八重洲地下街 北口 喫煙所",
+    "lat": 35.6822,
+    "lng": 139.7688,
+    "address": "東京都千代田区八重洲2丁目 八重洲地下街北口",
+    "type": "屋内（地下街）",
+    "source": "JREメディア https://media.jreast.co.jp/articles/652"
+  },
+  {
+    "id": "tokyo-kitte",
+    "name": "KITTE 5階 喫煙所",
+    "lat": 35.6789,
+    "lng": 139.7645,
+    "address": "東京都千代田区丸の内2丁目7-2 KITTE 5階",
+    "type": "屋内（商業施設）",
+    "source": "JREメディア https://media.jreast.co.jp/articles/652"
+  },
+  {
+    "id": "shinjuku-west-exit",
+    "name": "新宿駅西口喫煙所",
+    "lat": 35.6906,
+    "lng": 139.6980,
+    "address": "東京都新宿区西新宿1丁目 新宿駅西口ロータリー内",
+    "type": "屋外（24時間）",
+    "source": "新宿区公式 https://www.city.shinjuku.lg.jp/seikatsu/file11_01_00003.html"
+  },
+  {
+    "id": "shinjuku-east-alta",
+    "name": "新宿駅東口公衆喫煙所（新宿アルタ前）",
+    "lat": 35.6913,
+    "lng": 139.7013,
+    "address": "東京都新宿区新宿3丁目 新宿駅東口駅前広場",
+    "type": "屋外（屋根なし）",
+    "source": "駅前マップ https://ekimaemap.com/shinjuku/"
+  },
+  {
+    "id": "shinjuku-lumine-est",
+    "name": "ルミネエスト新宿 7階 喫煙所",
     "lat": 35.6905,
-    "lng": 139.7016,
-    "address": "東京都新宿区新宿 新宿駅東口周辺",
-    "type": "屋外",
-    "source": "公開情報を基にした概算位置"
+    "lng": 139.7020,
+    "address": "東京都新宿区新宿3丁目38-1 ルミネエスト新宿 7階",
+    "type": "屋内（商業施設）",
+    "source": "東京ルッチ https://tokyolucci.jp/shinjukueki-kitsuenjo"
   },
   {
-    "id": "seed-shinjuku-2",
-    "name": "新宿駅南口 喫煙所",
-    "lat": 35.6885,
-    "lng": 139.7005,
-    "address": "東京都渋谷区代々木 新宿駅南口周辺",
+    "id": "shibuya-scramble",
+    "name": "渋谷駅前スクランブル交差点 喫煙所",
+    "lat": 35.6595,
+    "lng": 139.6995,
+    "address": "東京都渋谷区道玄坂1丁目 スクランブル交差点道玄坂側",
     "type": "屋外",
-    "source": "公開情報を基にした概算位置"
+    "source": "駅前マップ https://ekimaemap.com/shibuya/"
   },
   {
-    "id": "seed-shibuya-1",
-    "name": "渋谷駅ハチ公口 喫煙所",
-    "lat": 35.6590,
-    "lng": 139.7010,
-    "address": "東京都渋谷区道玄坂 渋谷駅周辺",
-    "type": "屋外",
-    "source": "公開情報を基にした概算位置"
+    "id": "shibuya-shinminami",
+    "name": "渋谷駅新南口喫煙所",
+    "lat": 35.6558,
+    "lng": 139.7038,
+    "address": "東京都渋谷区渋谷3丁目26 渋谷駅新南口",
+    "type": "屋外（終日）",
+    "source": "マチしる東京 https://machishiru.jp/shibuya-smokingarea/"
   },
   {
-    "id": "seed-ikebukuro-1",
-    "name": "池袋駅東口 喫煙所",
-    "lat": 35.7300,
-    "lng": 139.7120,
-    "address": "東京都豊島区南池袋 池袋駅東口周辺",
+    "id": "ikebukuro-east-front",
+    "name": "池袋駅東口駅前 喫煙所",
+    "lat": 35.7295,
+    "lng": 139.7128,
+    "address": "東京都豊島区南池袋1丁目 池袋駅東口横断歩道中央分離帯",
     "type": "屋外",
-    "source": "公開情報を基にした概算位置"
+    "source": "東京ルッチ https://tokyolucci.jp/ikebukuro-kitsuenjo"
   },
   {
-    "id": "seed-shinagawa-1",
-    "name": "品川駅港南口 喫煙所",
-    "lat": 35.6280,
-    "lng": 139.7400,
-    "address": "東京都港区港南 品川駅港南口周辺",
-    "type": "屋外",
-    "source": "公開情報を基にした概算位置"
+    "id": "ikebukuro-east-gosaro",
+    "name": "池袋駅東口五差路交差点 喫煙所",
+    "lat": 35.7285,
+    "lng": 139.7140,
+    "address": "東京都豊島区南池袋・東池袋 東口五差路交差点（豊島区指定）",
+    "type": "屋外（区指定）",
+    "source": "cocoyuco! https://cocoyuco.jp/ikebukuro-smoking-area/"
   },
   {
-    "id": "seed-ueno-1",
-    "name": "上野駅公園口 喫煙所",
-    "lat": 35.7135,
-    "lng": 139.7780,
-    "address": "東京都台東区上野 上野駅周辺",
-    "type": "屋外",
-    "source": "公開情報を基にした概算位置"
+    "id": "shinagawa-konan-fureai",
+    "name": "港南ふれあい広場 喫煙所",
+    "lat": 35.6270,
+    "lng": 139.7420,
+    "address": "東京都港区港南2丁目 港南ふれあい広場（品川駅港南口）",
+    "type": "屋外（港区指定）",
+    "source": "港区公式 https://www.city.minato.tokyo.jp/shisetsu/sonota/kitsuen/19.html"
   },
   {
-    "id": "seed-yokohama-1",
-    "name": "横浜駅西口 喫煙所",
-    "lat": 35.4655,
-    "lng": 139.6215,
-    "address": "神奈川県横浜市西区 横浜駅西口周辺",
-    "type": "屋外",
-    "source": "公開情報を基にした概算位置"
+    "id": "shinagawa-atre",
+    "name": "アトレ品川 4階 喫煙所",
+    "lat": 35.6288,
+    "lng": 139.7395,
+    "address": "東京都港区港南2丁目18-1 アトレ品川 4階",
+    "type": "屋内（商業施設）",
+    "source": "TOKYO HEADLINE https://www.tokyoheadline.com/429774/"
   },
   {
-    "id": "seed-osaka-1",
-    "name": "大阪駅周辺 喫煙所",
-    "lat": 34.7025,
-    "lng": 135.4959,
-    "address": "大阪府大阪市北区梅田 大阪駅周辺",
+    "id": "ueno-koen-guchi",
+    "name": "上野公園前交番裏 喫煙所",
+    "lat": 35.7155,
+    "lng": 139.7735,
+    "address": "東京都台東区上野公園 上野公園前交番裏（上野駅公園口より徒歩3分）",
     "type": "屋外",
-    "source": "公開情報を基にした概算位置"
+    "source": "JREメディア https://media.jreast.co.jp/articles/693"
   },
   {
-    "id": "seed-nagoya-1",
-    "name": "名古屋駅周辺 喫煙所",
-    "lat": 35.1706,
-    "lng": 136.8816,
-    "address": "愛知県名古屋市中村区 名古屋駅周辺",
+    "id": "yokohama-nishiguchi-hokko",
+    "name": "横浜駅西口北幸喫煙所",
+    "lat": 35.4675,
+    "lng": 139.6195,
+    "address": "神奈川県横浜市西区北幸1丁目8-1",
+    "type": "屋外（7:00-23:00）",
+    "source": "よこはまサーチ https://hamasearch.com/2025/07/02/"
+  },
+  {
+    "id": "yokohama-higashiguchi",
+    "name": "横浜駅みなみ東口 公衆喫煙所",
+    "lat": 35.4645,
+    "lng": 139.6255,
+    "address": "神奈川県横浜市西区高島 横浜中央郵便局斜め前・首都高高架下",
     "type": "屋外",
-    "source": "公開情報を基にした概算位置"
+    "source": "神奈川なんでもナビ https://ajisaikaikan.com/yokohama-smoking-area/"
+  },
+  {
+    "id": "osaka-dai4building",
+    "name": "大阪駅前第4ビル1階 喫煙所",
+    "lat": 34.7005,
+    "lng": 135.4970,
+    "address": "大阪府大阪市北区梅田1丁目11-4 大阪駅前第4ビル1階",
+    "type": "屋内（7:00-19:30）",
+    "source": "大阪市公式 https://www.city.osaka.lg.jp/kankyo/page/0000607135.html"
+  },
+  {
+    "id": "osaka-grandfront-umekita",
+    "name": "グランフロント大阪 うめきた広場 喫煙所",
+    "lat": 34.7055,
+    "lng": 135.4945,
+    "address": "大阪府大阪市北区大深町 グランフロント大阪 うめきた広場地下1階",
+    "type": "屋内（商業施設）",
+    "source": "USJハック https://usjhack.com/umeda-smokingarea/"
+  },
+  {
+    "id": "nagoya-takashimaya",
+    "name": "JR名古屋駅5階 喫煙所（タカシマヤ）",
+    "lat": 35.1700,
+    "lng": 136.8825,
+    "address": "愛知県名古屋市中村区名駅1丁目 JRセントラルタワーズ5階",
+    "type": "屋内（商業施設）",
+    "source": "TravelBook https://www.travelbook.co.jp/topic/46733"
+  },
+  {
+    "id": "nagoya-taikodori",
+    "name": "太閤通口噴水南側 喫煙所",
+    "lat": 35.1715,
+    "lng": 136.8790,
+    "address": "愛知県名古屋市中村区名駅 太閤通口噴水南側（名古屋市設置）",
+    "type": "屋外",
+    "source": "バス比較なび https://www.bushikaku.net/article/46278/"
   }
 ]

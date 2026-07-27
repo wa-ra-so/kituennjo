@@ -2,38 +2,50 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>近くの喫煙所マップ</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚬</text></svg>">
 <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="app-header">
-    <h1>🚬 近くの喫煙所マップ</h1>
-    <button id="locate-btn" class="icon-btn" title="現在地に戻る">📍</button>
-  </header>
-
   <div id="map"></div>
 
-  <div class="controls">
-    <label for="radius-select">表示範囲</label>
-    <select id="radius-select">
-      <option value="500">500m</option>
-      <option value="1000" selected>1km</option>
-      <option value="3000">3km</option>
-      <option value="5000">5km</option>
-      <option value="0">すべて</option>
-    </select>
-    <button id="add-spot-btn" class="primary-btn">＋ この地図の中心に喫煙所を追加</button>
+  <div class="top-bar">
+    <div class="title-panel">
+      <h1>近くの喫煙所</h1>
+      <div class="segmented" id="radius-segmented" role="tablist">
+        <button data-value="500">500m</button>
+        <button data-value="1000" class="active">1km</button>
+        <button data-value="3000">3km</button>
+        <button data-value="5000">5km</button>
+        <button data-value="0">すべて</button>
+      </div>
+    </div>
   </div>
 
-  <div id="status" class="status"></div>
+  <div class="fab-stack">
+    <button id="add-spot-btn" class="fab" title="この地図の中心に喫煙所を追加" aria-label="追加">
+      <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"/></svg>
+    </button>
+    <button id="locate-btn" class="fab fab-primary" title="現在地に戻る" aria-label="現在地">
+      <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm8.94 3A9.01 9.01 0 0 0 13 3.06V1h-2v2.06A9.01 9.01 0 0 0 3.06 11H1v2h2.06A9.01 9.01 0 0 0 11 20.94V23h2v-2.06A9.01 9.01 0 0 0 20.94 13H23v-2h-2.06zM12 19a7 7 0 1 1 0-14 7 7 0 0 1 0 14z"/></svg>
+    </button>
+  </div>
 
-  <section id="spot-list" class="spot-list"></section>
+  <div class="sheet" id="sheet">
+    <div class="sheet-handle-area" id="sheet-handle">
+      <div class="sheet-handle"></div>
+    </div>
+    <div class="sheet-content">
+      <div id="status" class="status"></div>
+      <section id="spot-list" class="spot-list"></section>
+    </div>
+  </div>
 
   <template id="spot-item-template">
     <div class="spot-item">
+      <div class="spot-icon">🚬</div>
       <div class="spot-info">
         <div class="spot-name"></div>
         <div class="spot-address"></div>

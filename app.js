@@ -3,21 +3,26 @@ const DEFAULT_CENTER = [35.6812, 139.7671]; // 東京駅
 
 const statusEl = document.getElementById("status");
 const listEl = document.getElementById("spot-list");
-const radiusSelect = document.getElementById("radius-select");
+const segmented = document.getElementById("radius-segmented");
 const locateBtn = document.getElementById("locate-btn");
 const addSpotBtn = document.getElementById("add-spot-btn");
 const itemTemplate = document.getElementById("spot-item-template");
+const sheet = document.getElementById("sheet");
+const sheetHandle = document.getElementById("sheet-handle");
+const fabStack = document.querySelector(".fab-stack");
 
 let map;
 let userPos = null;
 let userMarker = null;
 let accuracyCircle = null;
 let allSpots = [];
+let radius = 1000;
 const markerLayer = L.layerGroup();
+const markerBySpotId = new Map();
 
 function setStatus(msg, isError) {
   statusEl.textContent = msg || "";
-  statusEl.style.color = isError ? "#c62828" : "#b45309";
+  statusEl.style.color = isError ? "#ff3b30" : "var(--accent-blue)";
 }
 
 function haversineDistance(a, b) {
@@ -65,7 +70,8 @@ async function loadSeedSpots() {
 }
 
 function initMap() {
-  map = L.map("map").setView(DEFAULT_CENTER, 15);
+  map = L.map("map", { zoomControl: false }).setView(DEFAULT_CENTER, 15);
+  L.control.zoom({ position: "bottomleft" }).addTo(map);
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "&copy; OpenStreetMap contributors",
     maxZoom: 19,
@@ -73,18 +79,26 @@ function initMap() {
   markerLayer.addTo(map);
 }
 
+function pinIcon(isUserAdded) {
+  return L.divIcon({
+    className: "",
+    html: `<div class="smoke-pin${isUserAdded ? " user-added" : ""}"><span>🚬</span></div>`,
+    iconSize: [30, 30],
+    iconAnchor: [15, 28],
+    popupAnchor: [0, -26],
+  });
+}
+
 function renderMarkers(spots) {
   markerLayer.clearLayers();
+  markerBySpotId.clear();
   spots.forEach((spot) => {
-    const icon = L.divIcon({
-      className: "",
-      html: '<div class="smoke-pin">🚬</div>',
-      iconSize: [24, 24],
-      iconAnchor: [12, 20],
+    const marker = L.marker([spot.lat, spot.lng], {
+      icon: pinIcon(spot.type === "ユーザー登録"),
     });
-    const marker = L.marker([spot.lat, spot.lng], { icon });
     marker.bindPopup(popupHtml(spot));
     marker.addTo(markerLayer);
+    markerBySpotId.set(spot.id, marker);
   });
 }
 
@@ -95,10 +109,10 @@ function popupHtml(spot) {
   const dirUrl = `https://www.google.com/maps/dir/?api=1&destination=${spot.lat},${spot.lng}`;
   return `
     <div>
-      <strong>${escapeHtml(spot.name)}</strong><br>
-      <span style="font-size:12px;color:#777">${escapeHtml(spot.address || "")}</span><br>
-      ${distText ? `<span style="font-size:12px;color:#2e7d32">現在地から ${distText}</span><br>` : ""}
-      <a href="${dirUrl}" target="_blank" rel="noopener">Googleマップでルート案内</a>
+      <div class="popup-title">${escapeHtml(spot.name)}</div>
+      <div class="popup-address">${escapeHtml(spot.address || "")}</div>
+      ${distText ? `<div class="popup-distance">現在地から ${distText}</div>` : ""}
+      <a class="popup-link" href="${dirUrl}" target="_blank" rel="noopener">ルート案内</a>
     </div>
   `;
 }
@@ -110,7 +124,6 @@ function escapeHtml(str) {
 }
 
 function renderList() {
-  const radius = Number(radiusSelect.value);
   listEl.innerHTML = "";
 
   let spots = allSpots.map((spot) => ({
@@ -127,9 +140,7 @@ function renderList() {
 
   if (spots.length === 0) {
     const empty = document.createElement("p");
-    empty.style.padding = "0 4px";
-    empty.style.fontSize = "13px";
-    empty.style.color = "#777";
+    empty.className = "empty-message";
     empty.textContent = userPos
       ? "この範囲内に喫煙所の登録がありません。範囲を広げてみてください。"
       : "位置情報を取得すると、近い順に喫煙所が表示されます。";
@@ -149,10 +160,9 @@ function renderList() {
     item.addEventListener("click", (e) => {
       if (e.target === dirLink) return;
       map.setView([spot.lat, spot.lng], 17);
-      markerLayer.eachLayer((m) => {
-        const ll = m.getLatLng();
-        if (ll.lat === spot.lat && ll.lng === spot.lng) m.openPopup();
-      });
+      const marker = markerBySpotId.get(spot.id);
+      if (marker) marker.openPopup();
+      setSheetState("half");
     });
     listEl.appendChild(node);
   });
@@ -162,7 +172,13 @@ function updateUserMarker(lat, lng, accuracy) {
   userPos = [lat, lng];
   if (!userMarker) {
     userMarker = L.marker([lat, lng], {
-      icon: L.divIcon({ className: "", html: '<div class="user-dot"></div>', iconSize: [16, 16] }),
+      icon: L.divIcon({
+        className: "",
+        html: '<div class="user-dot-wrap"><div class="user-dot-pulse"></div><div class="user-dot"></div></div>',
+        iconSize: [22, 22],
+        iconAnchor: [11, 11],
+      }),
+      zIndexOffset: 1000,
     }).addTo(map);
   } else {
     userMarker.setLatLng([lat, lng]);
@@ -170,7 +186,7 @@ function updateUserMarker(lat, lng, accuracy) {
 
   if (accuracy) {
     if (!accuracyCircle) {
-      accuracyCircle = L.circle([lat, lng], { radius: accuracy, color: "#1565c0", fillOpacity: 0.08, weight: 1 }).addTo(map);
+      accuracyCircle = L.circle([lat, lng], { radius: accuracy, color: "#007aff", fillOpacity: 0.08, weight: 1 }).addTo(map);
     } else {
       accuracyCircle.setLatLng([lat, lng]).setRadius(accuracy);
     }
@@ -231,15 +247,113 @@ function addSpotAtMapCenter() {
   setStatus("喫煙所を追加しました。");
 }
 
+function setupSegmentedControl() {
+  segmented.addEventListener("click", (e) => {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+    segmented.querySelectorAll("button").forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    radius = Number(btn.dataset.value);
+    renderList();
+  });
+}
+
+// ---------- Bottom sheet drag (peek / half / full) ----------
+
+let sheetHeights = { peek: 140, half: 0, full: 0 };
+let sheetState = "half";
+let dragStartY = 0;
+let dragStartHeight = 0;
+let isDragging = false;
+
+function computeSheetHeights() {
+  const vh = window.innerHeight;
+  sheetHeights = {
+    peek: 140,
+    half: Math.round(vh * 0.5),
+    full: Math.round(vh * 0.82),
+  };
+}
+
+function applySheetHeight(px) {
+  sheet.style.height = px + "px";
+  document.documentElement.style.setProperty("--sheet-height", px + "px");
+}
+
+function setSheetState(state) {
+  sheetState = state;
+  sheet.classList.remove("dragging");
+  fabStack.classList.remove("dragging");
+  applySheetHeight(sheetHeights[state]);
+}
+
+function setSheetHeightPx(px) {
+  const clamped = Math.min(sheetHeights.full, Math.max(sheetHeights.peek, px));
+  applySheetHeight(clamped);
+}
+
+function nearestState(px) {
+  const entries = Object.entries(sheetHeights);
+  let best = entries[0];
+  let bestDist = Infinity;
+  for (const [name, h] of entries) {
+    const d = Math.abs(h - px);
+    if (d < bestDist) {
+      bestDist = d;
+      best = [name, h];
+    }
+  }
+  return best[0];
+}
+
+function setupSheetDrag() {
+  computeSheetHeights();
+  setSheetState("half");
+
+  const onPointerDown = (e) => {
+    isDragging = true;
+    dragStartY = e.clientY;
+    dragStartHeight = sheet.getBoundingClientRect().height;
+    sheet.classList.add("dragging");
+    fabStack.classList.add("dragging");
+    sheetHandle.setPointerCapture(e.pointerId);
+  };
+
+  const onPointerMove = (e) => {
+    if (!isDragging) return;
+    const delta = dragStartY - e.clientY;
+    setSheetHeightPx(dragStartHeight + delta);
+  };
+
+  const onPointerUp = () => {
+    if (!isDragging) return;
+    isDragging = false;
+    const currentPx = sheet.getBoundingClientRect().height;
+    setSheetState(nearestState(currentPx));
+  };
+
+  sheetHandle.addEventListener("pointerdown", onPointerDown);
+  sheetHandle.addEventListener("pointermove", onPointerMove);
+  sheetHandle.addEventListener("pointerup", onPointerUp);
+  sheetHandle.addEventListener("pointercancel", onPointerUp);
+
+  window.addEventListener("resize", () => {
+    computeSheetHeights();
+    setSheetState(sheetState);
+  });
+}
+
 async function main() {
   initMap();
+  setupSegmentedControl();
+  setupSheetDrag();
+
   const seedSpots = await loadSeedSpots();
   const userSpots = loadUserSpots();
   allSpots = [...seedSpots, ...userSpots];
   renderMarkers(allSpots);
   renderList();
 
-  radiusSelect.addEventListener("change", renderList);
   locateBtn.addEventListener("click", () => locateUser(true));
   addSpotBtn.addEventListener("click", addSpotAtMapCenter);
 
