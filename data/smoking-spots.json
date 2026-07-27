@@ -838,5 +838,403 @@
       "まといて https://matoite.com/regional/funabashi-smoking-space/",
       "CLUB JT https://www.clubjt.jp/place/spot/pref-12/city-12003/area-5415/"
     ]
+  },
+  {
+    "id": "matsudo-nishiguchi-shinkado",
+    "name": "松戸駅西口 新角ビル1階 喫煙所",
+    "lat": 35.7873,
+    "lng": 139.9,
+    "address": "千葉県松戸市本町20-1 新角ビル1階（松戸駅西口駅前）",
+    "type": "屋内（民間ビル）",
+    "sources": [
+      "しばさんのブログ https://www.naka-nihonbashi.com/smoking/shinkado-matsudo/",
+      "松戸市公式（安全で快適なまちづくり条例） https://www.city.matsudo.chiba.jp/kurashi/anzen_anshin/bouhan/anzen_machidukuri/ankaijyourei.html"
+    ]
+  },
+  {
+    "id": "tsudanuma-morishia",
+    "name": "モリシア津田沼 喫煙ルーム",
+    "lat": 35.6903,
+    "lng": 140.0223,
+    "address": "千葉県習志野市谷津1丁目 モリシア津田沼（津田沼駅南口すぐ）",
+    "type": "屋内（商業施設）",
+    "sources": [
+      "まといて https://matoite.com/regional/tsudanuma-smoking-space/",
+      "CLUB JT https://www.clubjt.jp/place/spot/pref-12/city-12013/area-1560/"
+    ]
+  },
+  {
+    "id": "tsudanuma-aeonmall-south",
+    "name": "イオンモール津田沼 South棟6階 喫煙所",
+    "lat": 35.6928,
+    "lng": 140.0192,
+    "address": "千葉県習志野市津田沼1丁目 イオンモール津田沼 South棟6階飲食店街",
+    "type": "屋内（商業施設）",
+    "sources": [
+      "まといて https://matoite.com/regional/tsudanuma-smoking-space/",
+      "CLUB JT https://www.clubjt.jp/place/spot/pref-12/city-12013/area-1560/"
+    ]
+  },
+  {
+    "id": "kaihinmakuhari-koukashita",
+    "name": "海浜幕張駅高架下 喫煙所",
+    "lat": 35.6478,
+    "lng": 140.0362,
+    "address": "千葉県千葉市美浜区ひび野2丁目 海浜幕張駅高架下（南口・北口から徒歩1-2分）",
+    "type": "屋外（高架下）",
+    "sources": [
+      "MEQQE https://meqqe.jp/spots/10141149",
+      "まといて https://matoite.com/regional/kaihinmakuhari-smoking-space/",
+      "しばさんのブログ https://www.naka-nihonbashi.com/smoking/kaihin-makuhari/"
+    ]
+  },
+  {
+    "id": "ichikawa-shapo",
+    "name": "シャポー市川 レストランフロア 喫煙所",
+    "lat": 35.7311,
+    "lng": 139.9073,
+    "address": "千葉県市川市市川1丁目 シャポー市川 レストランフロア（10:00-22:30）",
+    "type": "屋内（商業施設）",
+    "sources": [
+      "CLUB JT https://www.clubjt.jp/place/spot/pref-12/city-12002/area-1554/",
+      "たばこすう https://www.town-coupon.com/area/ichikawa"
+    ]
+  },
+  {
+    "id": "narita-t1",
+    "name": "成田空港 第1旅客ターミナル 喫煙所",
+    "lat": 35.7647,
+    "lng": 140.3864,
+    "address": "千葉県成田市三里塚 成田国際空港 第1旅客ターミナル（1F到着階〜4Fに複数設置）",
+    "type": "屋内（空港）",
+    "sources": [
+      "成田国際空港公式 https://www.narita-airport.jp/ja/service/other/smoking/",
+      "SimVoyage https://simvoyage.net/asia/japan/tokyo/narita-haneda-smoking-map/"
+    ]
+  },
+  {
+    "id": "narita-t2",
+    "name": "成田空港 第2旅客ターミナル 1階屋外喫煙所",
+    "lat": 35.7735,
+    "lng": 140.3897,
+    "address": "千葉県成田市古込 成田国際空港 第2旅客ターミナル 1階（タクシー乗り場30番付近）",
+    "type": "屋外（空港）",
+    "sources": [
+      "成田国際空港公式 https://www.narita-airport.jp/ja/service/other/smoking/",
+      "モットスイタイ https://mottosuitai.com/search/area/narita-airport/"
+    ]
+  },
+  {
+    "id": "maihama-kitaguchi",
+    "name": "舞浜駅北口 喫煙所",
+    "lat": 35.6335,
+    "lng": 139.88,
+    "address": "千葉県浦安市舞浜 舞浜駅北口（改札から徒歩約3分）",
+    "type": "屋外",
+    "sources": [
+      "ベイちばinfo https://www.baychiba.info/blog/news/71792",
+      "dr-stick https://dr-stick.shop/tips/column/maihama-station-smoking/"
+    ]
+  },
+  {
+    "id": "maihama-minamiguchi-koukashita",
+    "name": "舞浜駅南口 ディズニーリゾートライン高架下 喫煙所",
+    "lat": 35.6325,
+    "lng": 139.8815,
+    "address": "千葉県浦安市舞浜 舞浜駅南口 イクスピアリ手前・リゾートライン高架下",
+    "type": "屋外（高架下）",
+    "sources": [
+      "ベイちばinfo https://www.baychiba.info/blog/news/73375",
+      "浦安に住みたい！ https://sumitai.ne.jp/urayasu/2018-08-31/57368.html"
+    ]
+  },
+  {
+    "id": "kawasaki-nishiguchi",
+    "name": "川崎駅西口 指定喫煙所",
+    "lat": 35.5312,
+    "lng": 139.6955,
+    "address": "神奈川県川崎市幸区堀川町 川崎駅西口バスロータリー付近（24時間）",
+    "type": "屋外（市指定）",
+    "sources": [
+      "川崎市公式（路上喫煙防止対策） https://www.city.kawasaki.jp/kurashi/category/262-2-4-0-0-0-0-0-0-0.html",
+      "MEQQE https://meqqe.jp/spots/10040668"
+    ]
+  },
+  {
+    "id": "musashikosugi-kitaguchi",
+    "name": "武蔵小杉駅北口 指定喫煙所",
+    "lat": 35.5772,
+    "lng": 139.6588,
+    "address": "神奈川県川崎市中原区小杉町1丁目403 JR武蔵小杉駅北改札外・北口ロータリー脇",
+    "type": "屋外（市指定）",
+    "sources": [
+      "武蔵小杉ブログ https://musashikosugi.blog.shinobi.jp/Entry/7075/",
+      "武蔵小杉ガイド https://musashi-kosugi.guide/smoking/"
+    ]
+  },
+  {
+    "id": "musashikosugi-yokosukasen",
+    "name": "武蔵小杉駅横須賀線口駅前広場 喫煙所",
+    "lat": 35.575,
+    "lng": 139.657,
+    "address": "神奈川県川崎市中原区新丸子東 武蔵小杉駅横須賀線口駅前広場（徒歩約1分）",
+    "type": "屋外（市指定）",
+    "sources": [
+      "武蔵小杉ブログ https://musashikosugi.blog.shinobi.jp/Entry/7075/",
+      "武蔵小杉ガイド https://musashi-kosugi.guide/smoking/"
+    ]
+  },
+  {
+    "id": "fujisawa-kitaguchi",
+    "name": "藤沢駅北口 喫煙所",
+    "lat": 35.3392,
+    "lng": 139.4872,
+    "address": "神奈川県藤沢市藤沢552-9",
+    "type": "屋外",
+    "sources": [
+      "MEQQE https://meqqe.jp/spots/10040983",
+      "CLUB JT https://www.clubjt.jp/place/spot/pref-14/city-14004/area-1270/"
+    ]
+  },
+  {
+    "id": "fujisawa-shonan-gate",
+    "name": "ODAKYU 湘南 GATE 7階 喫煙所",
+    "lat": 35.338,
+    "lng": 139.4869,
+    "address": "神奈川県藤沢市藤沢 ODAKYU 湘南 GATE 7階エスカレーター横（10:00-22:00）",
+    "type": "屋内（商業施設）",
+    "sources": [
+      "ペンギンのローカルお役立ち情報局 https://penguin4649.hatenablog.com/entry/2026/06/06/024318",
+      "CLUB JT https://www.clubjt.jp/place/spot/pref-14/city-14004/area-1270/"
+    ]
+  },
+  {
+    "id": "sakuragicho-taxi",
+    "name": "桜木町駅前ロータリー 喫煙所",
+    "lat": 35.451,
+    "lng": 139.632,
+    "address": "神奈川県横浜市中区桜木町 桜木町駅前ロータリー中央部（みなとみらい21地区は喫煙禁止地区）",
+    "type": "屋外",
+    "sources": [
+      "MEQQE https://meqqe.jp/spots/10040961",
+      "ハマのくま横浜散歩 https://hamakuma3.com/sakuragicho-station-smoking-area/"
+    ]
+  },
+  {
+    "id": "kawaguchi-higashiguchi",
+    "name": "川口駅東口駅前駐輪場前 指定喫煙場所",
+    "lat": 35.8072,
+    "lng": 139.7178,
+    "address": "埼玉県川口市川口1丁目1-1 川口駅東口（「働く歓びの像」前が目印）",
+    "type": "屋外（市指定）",
+    "sources": [
+      "川口市公式（路上喫煙禁止地区及び指定喫煙所一覧） https://www.city.kawaguchi.lg.jp/soshiki/01100/040/kinshichikukitsuenjyo/45301.html",
+      "MEQQE https://meqqe.jp/spots/10041072"
+    ]
+  },
+  {
+    "id": "tokorozawa-nishiguchi-waltz",
+    "name": "所沢駅西口 ワルツビル前 喫煙所",
+    "lat": 35.786,
+    "lng": 139.468,
+    "address": "埼玉県所沢市日吉町12番1号 所沢駅西口ワルツビル前",
+    "type": "屋外（市指定）",
+    "sources": [
+      "所沢市公式（指定喫煙所利用について） https://www.city.tokorozawa.saitama.jp/kurashi/seikatukankyo/seikatsukankyou/arukitabakoboushi/smokingarea.html",
+      "MEQQE https://meqqe.jp/spots/10041103"
+    ]
+  },
+  {
+    "id": "kawagoe-nishiguchi",
+    "name": "川越駅西口 喫煙所",
+    "lat": 35.9072,
+    "lng": 139.4812,
+    "address": "埼玉県川越市脇田本町 川越駅西口バスロータリー端（駅から徒歩約2分）",
+    "type": "屋外",
+    "sources": [
+      "MEQQE https://meqqe.jp/spots/10041095",
+      "マチしる埼玉 https://saitama.machishiru.jp/kawagoest-kitsuenjo/"
+    ]
+  },
+  {
+    "id": "tsukuba-station",
+    "name": "つくば駅 喫煙所",
+    "lat": 36.0827,
+    "lng": 140.1117,
+    "address": "茨城県つくば市吾妻1丁目6-5（つくば市は路上喫煙禁止）",
+    "type": "屋外",
+    "sources": [
+      "Holiday https://haveagood.holiday/spots/2149903/map",
+      "CLUB JT https://www.clubjt.jp/place/spot/pref-8/city-08016/area-7801/"
+    ]
+  },
+  {
+    "id": "tachikawa-koushu",
+    "name": "立川駅周辺 公衆喫煙所（コンテナ型）",
+    "lat": 35.698,
+    "lng": 139.414,
+    "address": "東京都立川市曙町 立川駅周辺（閉鎖型コンテナ喫煙所・6:00-22:00）",
+    "type": "屋内（市設置コンテナ型）",
+    "sources": [
+      "立川市公式（立川駅周辺公衆喫煙所） https://www.city.tachikawa.lg.jp/kurashi/seikatsu/1002321/1002334.html",
+      "TOKYO HEADLINE https://www.tokyoheadline.com/429764/"
+    ]
+  },
+  {
+    "id": "kichijoji-trailer",
+    "name": "吉祥寺駅南口 喫煙トレーラーハウス",
+    "lat": 35.7024,
+    "lng": 139.5798,
+    "address": "東京都武蔵野市吉祥寺南町1丁目2 吉祥寺駅南口（最大12人・7:00-25:00）",
+    "type": "屋内（トレーラーハウス型）",
+    "sources": [
+      "吉祥寺.me https://kichijoji.me/column/guide/info-smokingcar1228/",
+      "東京ルッチ https://tokyolucci.jp/kichijouji-kitsuenjo"
+    ]
+  },
+  {
+    "id": "kichijoji-tokyu-roof",
+    "name": "東急百貨店吉祥寺店 屋上 喫煙所",
+    "lat": 35.7043,
+    "lng": 139.5786,
+    "address": "東京都武蔵野市吉祥寺本町2丁目3-1 東急百貨店吉祥寺店 屋上（10:00-22:00）",
+    "type": "屋外（商業施設屋上）",
+    "sources": [
+      "東京ルッチ https://tokyolucci.jp/kichijouji-kitsuenjo",
+      "dr-stick https://dr-stick.shop/tips/column/kichijoji_smoking_area/"
+    ]
+  },
+  {
+    "id": "machida-odakyu-higashiguchi",
+    "name": "小田急町田駅東口広場内 喫煙所",
+    "lat": 35.5427,
+    "lng": 139.4462,
+    "address": "東京都町田市原町田6丁目11 小田急町田駅東口広場内",
+    "type": "屋外",
+    "sources": [
+      "MEQQE https://meqqe.jp/spots/10040663",
+      "マチダクリップ https://machidaclip.com/spot/smoking-area-special-feature/"
+    ]
+  },
+  {
+    "id": "machida-kitaguchi-koban",
+    "name": "町田駅北口デッキ下 原町田交番前 喫煙所",
+    "lat": 35.5418,
+    "lng": 139.4478,
+    "address": "東京都町田市原町田6丁目1-11 町田駅北口デッキ下・原町田交番前",
+    "type": "屋外（市指定）",
+    "sources": [
+      "MEQQE https://meqqe.jp/spots/10040923",
+      "東京喫煙ナビ https://tobacco.tokyo.jp/smoking/3857"
+    ]
+  },
+  {
+    "id": "akihabara-showadori",
+    "name": "秋葉原昭和通り口 喫煙所",
+    "lat": 35.699,
+    "lng": 139.7745,
+    "address": "東京都千代田区神田平河町 首都高高架下（秋葉原駅昭和通り口・千代田区営）",
+    "type": "屋外（区営）",
+    "sources": [
+      "駅前マップ https://ekimaemap.com/akihabara/",
+      "マチしる東京 https://machishiru.jp/akihabara-smokingarea/"
+    ]
+  },
+  {
+    "id": "shinbashi-sl-hiroba",
+    "name": "新橋駅前SL広場 指定喫煙場所",
+    "lat": 35.666,
+    "lng": 139.7576,
+    "address": "東京都港区新橋2-7 新橋駅前SL広場（5:00-25:00）",
+    "type": "屋外（区指定）",
+    "sources": [
+      "港区公式 https://www.city.minato.tokyo.jp/shisetsu/sonota/kitsuen/01.html",
+      "NAVITIME https://www.navitime.co.jp/poi?spot=02022-1331610"
+    ]
+  },
+  {
+    "id": "shinbashi-karasumori",
+    "name": "新橋駅烏森口 指定喫煙場所（加熱式専用）",
+    "lat": 35.6655,
+    "lng": 139.757,
+    "address": "東京都港区新橋2-16 新橋駅烏森口（加熱式たばこ専用）",
+    "type": "屋外（区指定・加熱式専用）",
+    "sources": [
+      "港区公式 https://www.city.minato.tokyo.jp/shisetsu/sonota/kitsuen/02.html",
+      "NAVITIME https://www.navitime.co.jp/poi?spot=02022-1331611"
+    ]
+  },
+  {
+    "id": "kitasenju-higashiguchi",
+    "name": "北千住駅東口 公衆喫煙所",
+    "lat": 35.7495,
+    "lng": 139.8065,
+    "address": "東京都足立区千住旭町4 北千住駅東口交通広場（ガラス張りコンテナ型・足立区指定）",
+    "type": "屋内（区指定コンテナ型）",
+    "sources": [
+      "駅前マップ https://ekimaemap.com/kita-senju/",
+      "MEQQE https://meqqe.jp/spots/10040823"
+    ]
+  },
+  {
+    "id": "kitasenju-nishiguchi-deck",
+    "name": "北千住駅西口 公衆喫煙所（ペデストリアンデッキ上）",
+    "lat": 35.7492,
+    "lng": 139.8035,
+    "address": "東京都足立区千住2-59 北千住駅西口ペデストリアンデッキ上（足立区指定）",
+    "type": "屋外（区指定）",
+    "sources": [
+      "駅前マップ https://ekimaemap.com/kita-senju/",
+      "たばこすう https://www.town-coupon.com/shop_information/kitasennzyunisiguti"
+    ]
+  },
+  {
+    "id": "takasaki-station-area",
+    "name": "高崎駅周辺 喫煙所",
+    "lat": 36.322,
+    "lng": 139.0128,
+    "address": "群馬県高崎市八島町 高崎駅周辺（概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT https://www.clubjt.jp/place/spot/pref-10/city-10002/area-1654/",
+      "駅前喫煙所LaB。 https://ekme-pk2.hateblo.jp/entry/2020/09/21/162020"
+    ]
+  },
+  {
+    "id": "oyama-station-area",
+    "name": "小山駅周辺 喫煙所",
+    "lat": 36.3145,
+    "lng": 139.801,
+    "address": "栃木県小山市城山町 小山駅周辺（概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT https://www.clubjt.jp/place/spot/pref-9/city-09007/area-1672/",
+      "CLUB JT（小山市） https://www.clubjt.jp/place/spot/pref-9/city-09007/"
+    ]
+  },
+  {
+    "id": "kashiwa-takashimaya-stemo",
+    "name": "柏高島屋ステーションモール 喫煙所",
+    "lat": 35.8617,
+    "lng": 139.9705,
+    "address": "千葉県柏市末広町 柏高島屋ステーションモール・新館（柏駅西口直結。駅前の路上指定喫煙所は廃止済み）",
+    "type": "屋内（商業施設）",
+    "sources": [
+      "館内喫煙所LaB. https://kannai-pk2.hateblo.jp/entry/41948671",
+      "柏高島屋ステーションモール公式（サービス案内） https://www.takashimaya.co.jp/kashiwa/stemo/service_guide/",
+      "柏市公式（受動喫煙防止対策） https://www.city.kashiwa.lg.jp/kenkozoshin/shiseijoho/shisei/health_hospital/mainmenu/judokitsuen/3382.html"
+    ]
+  },
+  {
+    "id": "nishifunabashi-station-area",
+    "name": "西船橋駅周辺 喫煙所",
+    "lat": 35.7076,
+    "lng": 139.9587,
+    "address": "千葉県船橋市西船 西船橋駅周辺（概算位置。船橋市の路上喫煙重点区域）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT https://www.clubjt.jp/place/spot/pref-12/city-12003/area-1381/",
+      "船橋市公式（指定喫煙所設置に伴う実証実験について） https://www.city.funabashi.lg.jp/machi/kankyou/003/p001507.html"
+    ]
   }
 ]
