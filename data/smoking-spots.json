@@ -1527,5 +1527,476 @@
       "喫煙所マップ https://moqlog.jp/smoke/area/area01/pref01_03/munic03-02/sta03-11/",
       "CLUB JT https://www.clubjt.jp/place/spot/pref-12/"
     ]
+  },
+  {
+    "id": "sakura-keisei-station",
+    "name": "京成佐倉駅周辺 喫煙所",
+    "lat": 35.722,
+    "lng": 140.223,
+    "address": "千葉県佐倉市栄町 京成佐倉駅周辺（佐倉市は京成佐倉・臼井・ユーカリが丘・志津・JR佐倉の5駅周辺が喫煙禁止区域）",
+    "type": "概算位置（周辺は喫煙禁止区域）",
+    "sources": [
+      "佐倉市公式（喫煙禁止区域について） https://www.city.sakura.lg.jp/soshiki/seikatsukankyoka/144/3326.html",
+      "CLUB JT（千葉県） https://www.clubjt.jp/place/spot/pref-12/"
+    ]
+  },
+  {
+    "id": "shinkamagaya-idecafe",
+    "name": "新鎌ヶ谷駅連絡通路 喫煙可能店舗（イデカフェ）",
+    "lat": 35.778,
+    "lng": 140.003,
+    "address": "千葉県鎌ケ谷市新鎌ケ谷 新鎌ヶ谷駅連絡通路（イオン鎌ヶ谷SC内にも喫煙可能店舗あり）",
+    "type": "屋内（店舗喫煙スペース）",
+    "sources": [
+      "さがすもーく（鎌ケ谷市の喫煙所一覧） https://www.sagasmo.com/search/%E9%8E%8C%E3%82%B1%E8%B0%B7%E5%B8%82",
+      "CLUB JT（鎌ケ谷市） https://www.clubjt.jp/place/spot/pref-12/city-12021/"
+    ]
+  },
+  {
+    "id": "kimitsu-ekimae",
+    "name": "君津駅前 指定喫煙所",
+    "lat": 35.332,
+    "lng": 139.902,
+    "address": "千葉県君津市東坂田 君津駅前",
+    "type": "屋外",
+    "sources": [
+      "駅前喫煙所LaB。 https://ekme-pk2.hateblo.jp/entry/2020/06/02/183250",
+      "CLUB JT（君津駅） https://www.clubjt.jp/place/spot/pref-12/city-12022/area-1873/"
+    ]
+  },
+  {
+    "id": "noda-station-area",
+    "name": "野田市駅周辺 喫煙所",
+    "lat": 35.949,
+    "lng": 139.868,
+    "address": "千葉県野田市野田 野田市駅周辺（概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT（千葉県） https://www.clubjt.jp/place/spot/pref-12/",
+      "千葉県公式（たばこ対策に関するデータ・市町村の路上喫煙規制条例制定状況） https://www.pref.chiba.lg.jp/kenzu/tabako/kituendata.html"
+    ]
+  },
+  {
+    "id": "togane-station-area",
+    "name": "東金駅周辺 喫煙所",
+    "lat": 35.559,
+    "lng": 140.366,
+    "address": "千葉県東金市東岩崎 東金駅周辺（概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT（千葉県） https://www.clubjt.jp/place/spot/pref-12/",
+      "千葉県公式（たばこ対策に関するデータ・市町村の路上喫煙規制条例制定状況） https://www.pref.chiba.lg.jp/kenzu/tabako/kituendata.html"
+    ]
+  },
+  {
+    "id": "asahi-station-area",
+    "name": "旭駅周辺 喫煙所",
+    "lat": 35.72,
+    "lng": 140.647,
+    "address": "千葉県旭市ロ 旭駅周辺（概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT（千葉県） https://www.clubjt.jp/place/spot/pref-12/",
+      "千葉県公式（たばこ対策に関するデータ・市町村の路上喫煙規制条例制定状況） https://www.pref.chiba.lg.jp/kenzu/tabako/kituendata.html"
+    ]
+  },
+  {
+    "id": "katsuura-station-area",
+    "name": "勝浦駅周辺 喫煙所",
+    "lat": 35.152,
+    "lng": 140.317,
+    "address": "千葉県勝浦市墨名 勝浦駅周辺（概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT（千葉県） https://www.clubjt.jp/place/spot/pref-12/",
+      "千葉県公式（たばこ対策に関するデータ・市町村の路上喫煙規制条例制定状況） https://www.pref.chiba.lg.jp/kenzu/tabako/kituendata.html"
+    ]
+  },
+  {
+    "id": "kamogawa-station-area",
+    "name": "安房鴨川駅周辺 喫煙所",
+    "lat": 35.112,
+    "lng": 140.099,
+    "address": "千葉県鴨川市横渚 安房鴨川駅周辺（概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT（千葉県） https://www.clubjt.jp/place/spot/pref-12/",
+      "千葉県公式（たばこ対策に関するデータ・市町村の路上喫煙規制条例制定状況） https://www.pref.chiba.lg.jp/kenzu/tabako/kituendata.html"
+    ]
+  },
+  {
+    "id": "futtsu-aobori-area",
+    "name": "青堀駅周辺 喫煙所",
+    "lat": 35.312,
+    "lng": 139.856,
+    "address": "千葉県富津市大堀 青堀駅周辺（概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT（千葉県） https://www.clubjt.jp/place/spot/pref-12/",
+      "千葉県公式（たばこ対策に関するデータ・市町村の路上喫煙規制条例制定状況） https://www.pref.chiba.lg.jp/kenzu/tabako/kituendata.html"
+    ]
+  },
+  {
+    "id": "yotsukaido-station-area",
+    "name": "四街道駅周辺 喫煙所",
+    "lat": 35.669,
+    "lng": 140.169,
+    "address": "千葉県四街道市大日 四街道駅周辺（概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT（千葉県） https://www.clubjt.jp/place/spot/pref-12/",
+      "千葉県公式（たばこ対策に関するデータ・市町村の路上喫煙規制条例制定状況） https://www.pref.chiba.lg.jp/kenzu/tabako/kituendata.html"
+    ]
+  },
+  {
+    "id": "sodegaura-station-area",
+    "name": "袖ヶ浦駅周辺 喫煙所",
+    "lat": 35.43,
+    "lng": 140.003,
+    "address": "千葉県袖ケ浦市奈良輪 袖ヶ浦駅周辺（概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT（千葉県） https://www.clubjt.jp/place/spot/pref-12/",
+      "千葉県公式（たばこ対策に関するデータ・市町村の路上喫煙規制条例制定状況） https://www.pref.chiba.lg.jp/kenzu/tabako/kituendata.html"
+    ]
+  },
+  {
+    "id": "yachimata-station-area",
+    "name": "八街駅周辺 喫煙所",
+    "lat": 35.666,
+    "lng": 140.318,
+    "address": "千葉県八街市八街 八街駅周辺（概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT（千葉県） https://www.clubjt.jp/place/spot/pref-12/",
+      "千葉県公式（たばこ対策に関するデータ・市町村の路上喫煙規制条例制定状況） https://www.pref.chiba.lg.jp/kenzu/tabako/kituendata.html"
+    ]
+  },
+  {
+    "id": "shiroi-station-area",
+    "name": "白井駅周辺 喫煙所",
+    "lat": 35.791,
+    "lng": 140.056,
+    "address": "千葉県白井市復 白井駅周辺（概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT（千葉県） https://www.clubjt.jp/place/spot/pref-12/",
+      "千葉県公式（たばこ対策に関するデータ・市町村の路上喫煙規制条例制定状況） https://www.pref.chiba.lg.jp/kenzu/tabako/kituendata.html"
+    ]
+  },
+  {
+    "id": "tomisato-city-area",
+    "name": "富里市中心部 喫煙所",
+    "lat": 35.767,
+    "lng": 140.342,
+    "address": "千葉県富里市七栄 富里市役所周辺（市内に鉄道駅なし。概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT（千葉県） https://www.clubjt.jp/place/spot/pref-12/",
+      "千葉県公式（たばこ対策に関するデータ・市町村の路上喫煙規制条例制定状況） https://www.pref.chiba.lg.jp/kenzu/tabako/kituendata.html"
+    ]
+  },
+  {
+    "id": "minamiboso-chikura-area",
+    "name": "千倉駅周辺 喫煙所",
+    "lat": 34.976,
+    "lng": 139.954,
+    "address": "千葉県南房総市千倉町 千倉駅周辺（概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT（千葉県） https://www.clubjt.jp/place/spot/pref-12/",
+      "千葉県公式（たばこ対策に関するデータ・市町村の路上喫煙規制条例制定状況） https://www.pref.chiba.lg.jp/kenzu/tabako/kituendata.html"
+    ]
+  },
+  {
+    "id": "sosa-yokaichiba-area",
+    "name": "八日市場駅周辺 喫煙所",
+    "lat": 35.708,
+    "lng": 140.561,
+    "address": "千葉県匝瑳市八日市場イ 八日市場駅周辺（概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT（千葉県） https://www.clubjt.jp/place/spot/pref-12/",
+      "千葉県公式（たばこ対策に関するデータ・市町村の路上喫煙規制条例制定状況） https://www.pref.chiba.lg.jp/kenzu/tabako/kituendata.html"
+    ]
+  },
+  {
+    "id": "katori-sawara-area",
+    "name": "佐原駅周辺 喫煙所",
+    "lat": 35.893,
+    "lng": 140.499,
+    "address": "千葉県香取市佐原イ 佐原駅周辺（概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT（千葉県） https://www.clubjt.jp/place/spot/pref-12/",
+      "千葉県公式（たばこ対策に関するデータ・市町村の路上喫煙規制条例制定状況） https://www.pref.chiba.lg.jp/kenzu/tabako/kituendata.html"
+    ]
+  },
+  {
+    "id": "sanmu-naruto-area",
+    "name": "成東駅周辺 喫煙所",
+    "lat": 35.592,
+    "lng": 140.406,
+    "address": "千葉県山武市津辺 成東駅周辺（概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT（千葉県） https://www.clubjt.jp/place/spot/pref-12/",
+      "千葉県公式（たばこ対策に関するデータ・市町村の路上喫煙規制条例制定状況） https://www.pref.chiba.lg.jp/kenzu/tabako/kituendata.html"
+    ]
+  },
+  {
+    "id": "isumi-ohara-area",
+    "name": "大原駅周辺 喫煙所",
+    "lat": 35.25,
+    "lng": 140.39,
+    "address": "千葉県いすみ市大原 大原駅周辺（概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT（千葉県） https://www.clubjt.jp/place/spot/pref-12/",
+      "千葉県公式（たばこ対策に関するデータ・市町村の路上喫煙規制条例制定状況） https://www.pref.chiba.lg.jp/kenzu/tabako/kituendata.html"
+    ]
+  },
+  {
+    "id": "oamishirasato-area",
+    "name": "大網駅周辺 喫煙所",
+    "lat": 35.522,
+    "lng": 140.32,
+    "address": "千葉県大網白里市南今泉 大網駅周辺（概算位置）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT（千葉県） https://www.clubjt.jp/place/spot/pref-12/",
+      "千葉県公式（たばこ対策に関するデータ・市町村の路上喫煙規制条例制定状況） https://www.pref.chiba.lg.jp/kenzu/tabako/kituendata.html"
+    ]
+  },
+  {
+    "id": "kinshicho-kitaguchi",
+    "name": "錦糸町駅北口 喫煙所",
+    "lat": 35.6975,
+    "lng": 139.8145,
+    "address": "東京都墨田区江東橋3丁目14-6 錦糸町駅北口（周辺は路上喫煙禁止推進地区）",
+    "type": "屋外（区指定）",
+    "sources": [
+      "墨田区公式（路上喫煙禁止推進地区・指定喫煙所） https://www.city.sumida.lg.jp/kurashi/volunteer/rojyou_kinnen/suishintiku.html",
+      "たばこすう https://www.town-coupon.com/shop_information/kinnsityoukita",
+      "まといて https://matoite.com/regional/kinshicho-smoking-space/"
+    ]
+  },
+  {
+    "id": "kinshicho-minamiguchi",
+    "name": "錦糸町駅南口バスターミナル前 喫煙所",
+    "lat": 35.696,
+    "lng": 139.814,
+    "address": "東京都墨田区江東橋4丁目 錦糸町駅南口バスターミナル前（スケルトン型）",
+    "type": "屋外（区指定）",
+    "sources": [
+      "墨田区公式 https://www.city.sumida.lg.jp/kurashi/volunteer/rojyou_kinnen/suishintiku.html",
+      "まといて https://matoite.com/regional/kinshicho-smoking-space/"
+    ]
+  },
+  {
+    "id": "kameido-ekimae",
+    "name": "亀戸駅前 喫煙所",
+    "lat": 35.6975,
+    "lng": 139.8265,
+    "address": "東京都江東区亀戸5丁目 亀戸駅前",
+    "type": "屋外",
+    "sources": [
+      "CLUB JT（亀戸駅前） https://www.clubjt.jp/place/spot/pref-13/city-13008/area-17542/",
+      "CLUB JT（東京都） https://www.clubjt.jp/place/spot/pref-13/"
+    ]
+  },
+  {
+    "id": "kamata-nishiguchi",
+    "name": "蒲田駅西口駅前 公衆喫煙所",
+    "lat": 35.5628,
+    "lng": 139.715,
+    "address": "東京都大田区西蒲田7-68 蒲田駅西口駅前",
+    "type": "屋外（区設置）",
+    "sources": [
+      "大田区公式（大田区公衆喫煙所について） https://www.city.ota.tokyo.jp/seikatsu/sumaimachinami/kankyou/bika/kitsuenjoseibi.html",
+      "東京喫煙ナビ https://tobacco.tokyo.jp/smoking/4607",
+      "NAVITIME https://www.navitime.co.jp/poi?spot=02022-1331791"
+    ]
+  },
+  {
+    "id": "kamata-higashiguchi",
+    "name": "蒲田駅東口駅前 仮設公衆喫煙所",
+    "lat": 35.5632,
+    "lng": 139.7168,
+    "address": "東京都大田区蒲田5-14 蒲田駅東口駅前（24時間）",
+    "type": "屋外（区設置）",
+    "sources": [
+      "大田区公式 https://www.city.ota.tokyo.jp/seikatsu/sumaimachinami/kankyou/bika/kitsuenjoseibi.html",
+      "駅前マップ https://ekimaemap.com/kamata/",
+      "東京喫煙ナビ https://tobacco.tokyo.jp/smoking/4606"
+    ]
+  },
+  {
+    "id": "kameari-minamiguchi",
+    "name": "亀有駅南口 指定喫煙所",
+    "lat": 35.7615,
+    "lng": 139.8478,
+    "address": "東京都葛飾区亀有3丁目 亀有駅南口（2024年3月開設・カメ模様のデザイン）",
+    "type": "屋外（区指定）",
+    "sources": [
+      "葛飾区公式（喫煙禁止区域の指定について） https://www.city.katsushika.lg.jp/information/1000084/1030260/1025304.html",
+      "号外NET 葛飾区 https://katsushika.goguynet.jp/2024/03/26/kamearisouth-smokingarea/"
+    ]
+  },
+  {
+    "id": "shinkoiwa-shitei",
+    "name": "新小岩駅周辺 指定喫煙所",
+    "lat": 35.7165,
+    "lng": 139.858,
+    "address": "東京都葛飾区新小岩1丁目 新小岩駅周辺（駅周辺は喫煙禁止区域）",
+    "type": "屋外（区指定）",
+    "sources": [
+      "葛飾区公式 https://www.city.katsushika.lg.jp/information/1000084/1030260/1025304.html",
+      "CLUB JT（葛飾区） https://www.clubjt.jp/place/spot/pref-13/city-13022/"
+    ]
+  },
+  {
+    "id": "kasai-kouhoku",
+    "name": "西葛西駅前広場 公衆喫煙所",
+    "lat": 35.665,
+    "lng": 139.859,
+    "address": "東京都江戸川区西葛西6丁目 西葛西駅北口・南口広場（受動喫煙防止重点区域）",
+    "type": "屋外（区設置）",
+    "sources": [
+      "江戸川区公式（路上喫煙禁止・受動喫煙防止重点区域） https://www.city.edogawa.tokyo.jp/e024/toshikeikaku/kankyo/arukitabako/juutennkuiki.html",
+      "CLUB JT（東京都） https://www.clubjt.jp/place/spot/pref-13/"
+    ]
+  },
+  {
+    "id": "itabashi-koushu",
+    "name": "板橋区 公衆喫煙所（板橋駅周辺）",
+    "lat": 35.747,
+    "lng": 139.7195,
+    "address": "東京都板橋区板橋1丁目 板橋駅周辺（煙が外部に漏れない構造の区設置公衆喫煙所）",
+    "type": "屋内（区設置）",
+    "sources": [
+      "板橋区公式（公衆喫煙所について） https://www.city.itabashi.tokyo.jp/bousai/kougai/bika/kitsuen/1019824.html",
+      "CLUB JT（東京都） https://www.clubjt.jp/place/spot/pref-13/"
+    ]
+  },
+  {
+    "id": "oimachi-ekimae",
+    "name": "大井町駅前 喫煙所",
+    "lat": 35.6062,
+    "lng": 139.7345,
+    "address": "東京都品川区大井1丁目 大井町駅前",
+    "type": "屋外",
+    "sources": [
+      "CLUB JT（品川区） https://www.clubjt.jp/place/spot/pref-13/city-13009/",
+      "東京喫煙ナビ https://tobacco.tokyo.jp/smoking"
+    ]
+  },
+  {
+    "id": "nakameguro-ekimae",
+    "name": "中目黒駅周辺 喫煙所",
+    "lat": 35.644,
+    "lng": 139.699,
+    "address": "東京都目黒区上目黒1丁目 中目黒駅周辺",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT（目黒区） https://www.clubjt.jp/place/spot/pref-13/city-13010/",
+      "CLUB JT（東京都） https://www.clubjt.jp/place/spot/pref-13/"
+    ]
+  },
+  {
+    "id": "sangenjaya-shitei",
+    "name": "三軒茶屋駅周辺 世田谷区指定喫煙場所",
+    "lat": 35.6435,
+    "lng": 139.67,
+    "address": "東京都世田谷区太子堂 三軒茶屋駅周辺（世田谷区たばこルール適用区域）",
+    "type": "屋外（区指定）",
+    "sources": [
+      "世田谷区公式（世田谷区指定喫煙場所について） https://www.city.setagaya.lg.jp/01101/4805.html",
+      "世田谷区公式（世田谷区たばこルール） https://www.city.setagaya.lg.jp/01101/4803.html"
+    ]
+  },
+  {
+    "id": "nakano-ekimae",
+    "name": "中野駅周辺 指定喫煙所",
+    "lat": 35.706,
+    "lng": 139.666,
+    "address": "東京都中野区中野5丁目 中野駅周辺（駅周辺は喫煙禁止区域）",
+    "type": "屋外（区指定）",
+    "sources": [
+      "中野区公式（中野駅周辺の喫煙所について） https://www.city.tokyo-nakano.lg.jp/machizukuri/douro/kitsuenjyo.html",
+      "CLUB JT（東京都） https://www.clubjt.jp/place/spot/pref-13/"
+    ]
+  },
+  {
+    "id": "koenji-ekimae",
+    "name": "高円寺駅周辺 喫煙所",
+    "lat": 35.705,
+    "lng": 139.6495,
+    "address": "東京都杉並区高円寺南4丁目 高円寺駅周辺（杉並区生活安全及び環境美化条例の規制対象区域）",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT（杉並区） https://www.clubjt.jp/place/spot/pref-13/city-13015/",
+      "東京都福祉保健局（区市町村の路上喫煙関連条例状況） https://www.hokeniryo1.metro.tokyo.lg.jp/kensui/kitsuen/judoukitsuenboushitaisaku_kentoukai/1st/pdf/sankou11zyoureizyoukyou.pdf"
+    ]
+  },
+  {
+    "id": "akabane-ekimae",
+    "name": "赤羽駅周辺 喫煙所",
+    "lat": 35.778,
+    "lng": 139.721,
+    "address": "東京都北区赤羽1丁目 赤羽駅周辺",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT（北区） https://www.clubjt.jp/place/spot/pref-13/city-13017/",
+      "CLUB JT（東京都） https://www.clubjt.jp/place/spot/pref-13/"
+    ]
+  },
+  {
+    "id": "nippori-shitei",
+    "name": "日暮里駅周辺 荒川区指定喫煙場所",
+    "lat": 35.728,
+    "lng": 139.771,
+    "address": "東京都荒川区西日暮里2丁目 日暮里駅周辺",
+    "type": "屋外（区指定）",
+    "sources": [
+      "荒川区公式（荒川区指定喫煙場所） https://www.city.arakawa.tokyo.jp/a024/kankyou/kankyoubika/shiteikitsuenbasyo.html",
+      "CLUB JT（東京都） https://www.clubjt.jp/place/spot/pref-13/"
+    ]
+  },
+  {
+    "id": "nerima-ikebukuro-line",
+    "name": "練馬駅周辺 喫煙所",
+    "lat": 35.7375,
+    "lng": 139.654,
+    "address": "東京都練馬区練馬1丁目 練馬駅周辺",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT（練馬区） https://www.clubjt.jp/place/spot/pref-13/city-13020/",
+      "CLUB JT（東京都） https://www.clubjt.jp/place/spot/pref-13/"
+    ]
+  },
+  {
+    "id": "korakuen-ekimae",
+    "name": "後楽園・水道橋駅周辺 喫煙所",
+    "lat": 35.706,
+    "lng": 139.752,
+    "address": "東京都文京区後楽1丁目 後楽園・水道橋駅周辺",
+    "type": "概算位置",
+    "sources": [
+      "CLUB JT（文京区） https://www.clubjt.jp/place/spot/pref-13/city-13005/",
+      "CLUB JT（東京都） https://www.clubjt.jp/place/spot/pref-13/"
+    ]
+  },
+  {
+    "id": "ginza-shitei",
+    "name": "銀座周辺 中央区指定喫煙所",
+    "lat": 35.6717,
+    "lng": 139.765,
+    "address": "東京都中央区銀座4丁目 銀座周辺（中央区は区内全域で路上喫煙禁止）",
+    "type": "屋外（区指定）",
+    "sources": [
+      "CLUB JT（中央区） https://www.clubjt.jp/place/spot/pref-13/city-13002/",
+      "東京都福祉保健局（区市町村の路上喫煙関連条例状況） https://www.hokeniryo1.metro.tokyo.lg.jp/kensui/kitsuen/judoukitsuenboushitaisaku_kentoukai/1st/pdf/sankou11zyoureizyoukyou.pdf"
+    ]
   }
 ]
