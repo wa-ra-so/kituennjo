@@ -10,6 +10,7 @@ const itemTemplate = document.getElementById("spot-item-template");
 const sheet = document.getElementById("sheet");
 const sheetHandle = document.getElementById("sheet-handle");
 const fabStack = document.querySelector(".fab-stack");
+const osmBtn = document.getElementById("osm-btn");
 
 let map;
 let userPos = null;
@@ -109,10 +110,11 @@ function initMap() {
   }
 }
 
-function pinIcon(isUserAdded) {
+function pinIcon(isUserAdded, isOsm) {
+  const variant = isUserAdded ? " user-added" : isOsm ? " osm" : "";
   return L.divIcon({
     className: "",
-    html: `<div class="smoke-pin${isUserAdded ? " user-added" : ""}"><span>🚬</span></div>`,
+    html: `<div class="smoke-pin${variant}"><span>🚬</span></div>`,
     iconSize: [30, 30],
     iconAnchor: [15, 28],
     popupAnchor: [0, -26],
@@ -124,7 +126,7 @@ function renderMarkers(spots) {
   markerBySpotId.clear();
   spots.forEach((spot) => {
     const marker = L.marker([spot.lat, spot.lng], {
-      icon: pinIcon(spot.type === "ユーザー登録"),
+      icon: pinIcon(spot.type === "ユーザー登録", spot.osm),
     });
     marker.bindPopup(popupHtml(spot));
     marker.addTo(markerLayer);
@@ -308,6 +310,110 @@ function locateUser(recenter) {
   }
 }
 
+// ---------- OpenStreetMap lookup ----------
+// The bundled dataset is curated by hand and can never cover every smoking
+// area in Japan. This pulls whatever OSM knows about the area currently on
+// screen, so coverage works anywhere without shipping a huge file.
+// Data © OpenStreetMap contributors (ODbL).
+
+const OVERPASS_ENDPOINTS = [
+  "https://overpass-api.de/api/interpreter",
+  "https://overpass.kumi.systems/api/interpreter",
+];
+
+let osmSpots = [];
+let osmLoading = false;
+
+function osmTypeLabel(tags) {
+  const covered = tags.covered === "yes" || tags.indoor === "yes" || tags.shelter === "yes";
+  const heated =
+    tags["smoking:heated_tobacco"] === "only" || tags["smoking:electronic"] === "only";
+  return `${covered ? "屋内" : "屋外"}（OSM${heated ? "・加熱式専用" : ""}）`;
+}
+
+function osmToSpot(el) {
+  const lat = el.lat != null ? el.lat : el.center && el.center.lat;
+  const lng = el.lon != null ? el.lon : el.center && el.center.lon;
+  if (typeof lat !== "number" || typeof lng !== "number") return null;
+  const tags = el.tags || {};
+  const name =
+    tags["name:ja"] || tags.name || tags["operator:ja"] || tags.operator || "喫煙所（OSM）";
+  const addrParts = [
+    tags["addr:city"],
+    tags["addr:suburb"],
+    tags["addr:quarter"],
+    tags["addr:block_number"],
+    tags["addr:housenumber"],
+  ].filter(Boolean);
+  const note = tags["description:ja"] || tags.description || tags["note:ja"] || tags.note || "";
+  return {
+    id: `osm-${el.type}-${el.id}`,
+    name,
+    lat,
+    lng,
+    address: [addrParts.join(""), note].filter(Boolean).join(" "),
+    type: osmTypeLabel(tags),
+    sources: [`OpenStreetMap (ODbL) https://www.openstreetmap.org/${el.type}/${el.id}`],
+    osm: true,
+  };
+}
+
+async function fetchOsmForCurrentView() {
+  if (osmLoading) return;
+  const b = map.getBounds();
+  const bbox = `${b.getSouth().toFixed(5)},${b.getWest().toFixed(5)},${b
+    .getNorth()
+    .toFixed(5)},${b.getEast().toFixed(5)}`;
+  const query = `[out:json][timeout:25];(node["amenity"="smoking_area"](${bbox});way["amenity"="smoking_area"](${bbox});relation["amenity"="smoking_area"](${bbox}););out center tags;`;
+
+  osmLoading = true;
+  osmBtn.classList.add("loading");
+  setStatus("OpenStreetMap から周辺の喫煙所を検索中…");
+
+  let json = null;
+  for (const endpoint of OVERPASS_ENDPOINTS) {
+    try {
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ data: query }),
+      });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      json = await res.json();
+      break;
+    } catch (e) {
+      /* try the next mirror */
+    }
+  }
+
+  osmLoading = false;
+  osmBtn.classList.remove("loading");
+
+  if (!json) {
+    setStatus("OpenStreetMap に接続できませんでした。通信環境をご確認ください。", true);
+    return;
+  }
+
+  const known = new Set(allSpots.map((s) => s.id));
+  const fetched = (json.elements || []).map(osmToSpot).filter(Boolean);
+  const fresh = fetched.filter((s) => {
+    if (known.has(s.id)) return false;
+    // Drop anything already covered by a curated pin at the same place.
+    return !allSpots.some((c) => haversineDistance([c.lat, c.lng], [s.lat, s.lng]) <= 60);
+  });
+
+  if (fresh.length === 0) {
+    setStatus("この範囲に OpenStreetMap の追加データはありませんでした。");
+    return;
+  }
+
+  osmSpots = osmSpots.concat(fresh);
+  allSpots = allSpots.concat(fresh);
+  renderMarkers(allSpots);
+  renderList();
+  setStatus(`OpenStreetMap から ${fresh.length}件を追加しました（データ © OSM contributors）`);
+}
+
 function addSpotAtMapCenter() {
   const name = prompt("喫煙所の名前を入力してください（例：〇〇駅前 喫煙所）");
   if (!name) return;
@@ -466,6 +572,7 @@ async function main() {
 
   locateBtn.addEventListener("click", () => locateUser(true));
   addSpotBtn.addEventListener("click", addSpotAtMapCenter);
+  osmBtn.addEventListener("click", fetchOsmForCurrentView);
 
   locateUser(true);
 }

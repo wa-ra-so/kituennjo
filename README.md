@@ -7,7 +7,32 @@
 - 現在地を地図上に表示（青い丸）
 - 喫煙所を🚬ピンで表示し、タップすると名称・住所・現在地からの距離・Googleマップでのルート案内を表示
 - 現在地から近い順にリスト表示、表示範囲（500m/1km/3km/5km/すべて）を切り替え可能
+- 🔍ボタンで、表示中の範囲の喫煙所を **OpenStreetMap から追加取得**（後述）
 - 地図の中心に喫煙所を追加登録（端末のlocalStorageに保存。他の人とは共有されません）
+
+ピンの色で出所が分かります: 緑＝収録データ / オレンジ＝OpenStreetMap / 青＝自分で追加
+
+## OpenStreetMap からの追加取得
+
+同梱データは人手で調べたものなので、日本全国の喫煙所を網羅することは原理的にできません（例: 港区だけで区の指定喫煙場所は116か所あります）。そこで、**表示中の地図範囲の喫煙所を OpenStreetMap から取得する機能**を用意しています。
+
+- アプリ右下の🔍ボタンを押すと、その場で Overpass API に問い合わせて `amenity=smoking_area` を取得します
+- 既存データと同じ場所（60m以内）のものは自動的に除外されるので、重複ピンは出ません
+- 取得結果はその場限りの表示です（保存はされません）
+- データ © OpenStreetMap contributors（ODbL）
+
+### データファイルに取り込む
+
+取得結果を `data/smoking-spots.json` に恒久的に取り込みたい場合は、同梱の取り込みツールを使います。
+
+```bash
+node tools/import-osm.mjs 東京都 千葉県     # 都道府県を指定して取り込み
+node tools/import-osm.mjs --all-japan       # 全47都道府県
+node tools/import-osm.mjs --dry-run 東京都   # 件数だけ確認（書き込みなし）
+node tools/import-osm.mjs --from saved.json # 保存済みのOverpassレスポンスから取り込み
+```
+
+収録済みのデータが上書きされることはありません。同じidのもの、および既存スポットから60m以内のものはスキップされます。
 
 ## データについて
 
@@ -55,4 +80,12 @@ GitHub Pagesなどの静的ホスティングにそのまま配置すれば、�
 
 - `index.html` / `style.css` / `app.js` — アプリ本体
 - `data/smoking-spots.json` — 喫煙所の初期データ
+- `tools/import-osm.mjs` — OpenStreetMap からデータを取り込むCLI
+- `tools/osm.mjs` — 取り込み用の共通ロジック（Overpassクエリ生成・変換・重複排除）
 - `vendor/leaflet/` — 地図描画ライブラリ Leaflet（CDNに依存せずローカル同梱）
+
+## ライセンス・クレジット
+
+- 地図タイル: © OpenStreetMap contributors, © CARTO
+- OpenStreetMap 由来の喫煙所データ: © OpenStreetMap contributors（[ODbL](https://opendatacommons.org/licenses/odbl/)）
+- 収録データの各スポットの出典は `sources` フィールドに記載しています

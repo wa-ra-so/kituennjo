@@ -357,6 +357,25 @@ html, body {
   background: var(--accent-blue);
 }
 
+/* Community-sourced (OpenStreetMap) pins are visually distinct from the
+   hand-curated ones so the provenance is obvious at a glance. */
+.smoke-pin.osm {
+  background: #ff9500;
+}
+
+.fab.loading {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.fab.loading svg {
+  animation: fab-spin 1s linear infinite;
+}
+
+@keyframes fab-spin {
+  to { transform: rotate(360deg); }
+}
+
 /* Keep Leaflet's own bottom-left controls and the attribution clear of the
    sheet, which can be dragged down to just its handle. */
 .leaflet-bottom.leaflet-left,
