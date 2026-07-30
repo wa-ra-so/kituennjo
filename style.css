@@ -126,6 +126,12 @@ a {
   font-family: inherit;
 }
 
+/* Several elements below set an explicit `display`, which would otherwise beat
+   the user-agent's `[hidden] { display: none }` and leave them visible. */
+[hidden] {
+  display: none !important;
+}
+
 #map {
   position: fixed;
   inset: 0;
@@ -141,7 +147,8 @@ a {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 500;
+  /* Above the sheet (600) so the search dropdown is never covered by it. */
+  z-index: 700;
   padding: max(12px, env(safe-area-inset-top)) 12px 0;
   pointer-events: none;
 }
@@ -156,13 +163,211 @@ a {
   box-shadow: var(--shadow-medium);
 }
 
+.panel-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 2px 10px;
+}
+
 .title-panel h1 {
-  margin: 0 0 10px 2px;
+  margin: 0;
   font-size: var(--text-large);
   line-height: var(--lh-large);
   font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--foreground);
+  white-space: nowrap;
+}
+
+/* Reference-point indicator — HeroUI Chip variant="flat" color="primary",
+   onClose. Shown while the list is anchored to a searched place. */
+.ref-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+  max-width: 100%;
+  background: color-mix(in srgb, var(--primary) 14%, transparent);
+  color: var(--primary);
+  border-radius: 9999px;
+  padding: 4px 4px 4px 10px;
+  font-size: var(--text-tiny);
+  line-height: 1;
+  font-weight: 500;
+}
+
+.ref-chip > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ref-chip button {
+  flex: none;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 15px;
+  line-height: 1;
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  opacity: 0.7;
+}
+
+.ref-chip button:hover {
+  opacity: 1;
+  background: color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
+/* ---------- Search (HeroUI Input variant="flat" + Listbox popover) ---------- */
+
+.search-wrap {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.search-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--default-100);
+  border-radius: var(--radius-medium);
+  padding: 0 10px;
+  height: 40px;
+  color: var(--default-500);
+  transition: background 0.15s ease;
+}
+
+.search-input:focus-within {
+  background: var(--default-200);
+}
+
+.search-input svg {
+  flex: none;
+}
+
+.search-input input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: var(--foreground);
+  font-size: var(--text-small);
+  line-height: var(--lh-small);
+  padding: 0;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.search-input input::placeholder {
+  color: var(--default-500);
+}
+
+/* Hide the native clear affordance so ours is the only one */
+.search-input input::-webkit-search-cancel-button,
+.search-input input::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.search-clear {
+  flex: none;
+  border: none;
+  background: var(--default-300);
+  color: var(--content2-foreground);
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  font-size: 14px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-clear:hover {
+  opacity: var(--hover-opacity);
+}
+
+.search-results {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 10;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  max-height: min(52vh, 380px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: var(--content1);
+  border-radius: var(--radius-medium);
+  box-shadow: var(--shadow-medium);
+}
+
+.search-result {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 10px;
+  border-radius: var(--radius-small);
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.search-result:hover,
+.search-result:focus-visible {
+  background: var(--default-100);
+}
+
+.search-result-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.search-result-title {
+  font-size: var(--text-small);
+  line-height: var(--lh-small);
+  font-weight: 500;
+  color: var(--foreground);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search-result-sub {
+  font-size: var(--text-tiny);
+  line-height: var(--lh-tiny);
+  color: var(--default-500);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* HeroUI Chip variant="flat" size="sm" */
+.search-result-badge {
+  flex: none;
+  font-size: var(--text-tiny);
+  line-height: 1;
+  font-weight: 500;
+  color: var(--content2-foreground);
+  background: var(--default-100);
+  padding: 5px 8px;
+  border-radius: 9999px;
+}
+
+.search-result-action .search-result-title,
+.search-result-action .search-result-badge {
+  color: var(--primary);
+}
+
+.search-result-action .search-result-badge {
+  background: color-mix(in srgb, var(--primary) 14%, transparent);
 }
 
 /* ---------- Segmented control (HeroUI Tabs, variant "solid") ---------- */

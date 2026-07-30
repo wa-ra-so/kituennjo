@@ -11,9 +11,19 @@ const sheet = document.getElementById("sheet");
 const sheetHandle = document.getElementById("sheet-handle");
 const fabStack = document.querySelector(".fab-stack");
 const osmBtn = document.getElementById("osm-btn");
+const searchInput = document.getElementById("search-input");
+const searchClear = document.getElementById("search-clear");
+const searchResults = document.getElementById("search-results");
+const refChip = document.getElementById("ref-chip");
+const refChipLabel = document.getElementById("ref-chip-label");
+const refChipClear = document.getElementById("ref-chip-clear");
 
 let map;
 let userPos = null;
+// The point distances are measured from. Normally the user's location, but a
+// search result takes over so you can inspect another area's smoking spots.
+let searchPos = null;
+let searchLabel = "";
 let userMarker = null;
 let accuracyCircle = null;
 let allSpots = [];
@@ -37,6 +47,15 @@ function haversineDistance(a, b) {
     Math.sin(dLat / 2) ** 2 +
     Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
   return 2 * R * Math.asin(Math.sqrt(h));
+}
+
+/** Point that distances and the nearest-first ordering are measured from. */
+function refPos() {
+  return searchPos || userPos;
+}
+
+function isSearchActive() {
+  return searchPos !== null;
 }
 
 function formatDistance(m) {
@@ -135,15 +154,17 @@ function renderMarkers(spots) {
 }
 
 function popupHtml(spot) {
-  const distText = userPos
-    ? formatDistance(haversineDistance(userPos, [spot.lat, spot.lng]))
+  const ref = refPos();
+  const distText = ref
+    ? formatDistance(haversineDistance(ref, [spot.lat, spot.lng]))
     : "";
+  const distLabel = isSearchActive() ? escapeHtml(searchLabel) + "から" : "現在地から";
   const dirUrl = `https://www.google.com/maps/dir/?api=1&destination=${spot.lat},${spot.lng}`;
   return `
     <div>
       <div class="popup-title">${escapeHtml(spot.name)}</div>
       <div class="popup-address">${escapeHtml(spot.address || "")}</div>
-      ${distText ? `<div class="popup-distance">現在地から ${distText}</div>` : ""}
+      ${distText ? `<div class="popup-distance">${distLabel} ${distText}</div>` : ""}
       <a class="popup-link" href="${dirUrl}" target="_blank" rel="noopener">ルート案内</a>
     </div>
   `;
@@ -158,12 +179,13 @@ function escapeHtml(str) {
 function renderList() {
   listEl.innerHTML = "";
 
+  const ref = refPos();
   let spots = allSpots.map((spot) => ({
     ...spot,
-    distance: userPos ? haversineDistance(userPos, [spot.lat, spot.lng]) : null,
+    distance: ref ? haversineDistance(ref, [spot.lat, spot.lng]) : null,
   }));
 
-  if (userPos) {
+  if (ref) {
     spots.sort((a, b) => a.distance - b.distance);
     if (radius > 0) {
       spots = spots.filter((s) => s.distance <= radius);
@@ -173,8 +195,8 @@ function renderList() {
   if (spots.length === 0) {
     const empty = document.createElement("p");
     empty.className = "empty-message";
-    empty.textContent = userPos
-      ? "この範囲内に喫煙所の登録がありません。範囲を広げてみてください。"
+    empty.textContent = ref
+      ? "この範囲内に喫煙所の登録がありません。範囲を広げるか、🔍でOpenStreetMapから検索してみてください。"
       : "位置情報を取得すると、近い順に喫煙所が表示されます。";
     listEl.appendChild(empty);
     return;
@@ -266,7 +288,7 @@ function onPosition(pos) {
     pendingRecenter = false;
   }
 
-  setStatus(describeAccuracy(accuracy));
+  if (!isSearchActive()) setStatus(describeAccuracy(accuracy));
   renderList();
   renderMarkers(allSpots);
 }
@@ -413,6 +435,276 @@ async function fetchOsmForCurrentView() {
   renderMarkers(allSpots);
   renderList();
   setStatus(`OpenStreetMap から ${fresh.length}件を追加しました（データ © OSM contributors）`);
+}
+
+// ---------- Search by station / area name ----------
+// Two tiers: the bundled dataset is matched instantly offline, and anything
+// else falls back to Nominatim geocoding so places with no recorded smoking
+// area can still be inspected (then 🔍 pulls OSM data for that area).
+
+const NOMINATIM_URL = "https://nominatim.openstreetmap.org/search";
+const MAX_LOCAL_RESULTS = 8;
+
+/** Normalise for lenient Japanese matching (full/half width, case, 駅/市区町村). */
+function normalize(s) {
+  return (s || "")
+    .normalize("NFKC")
+    .toLowerCase()
+    .replace(/[\s　]+/g, "");
+}
+
+/** Extra key with trailing place-type suffixes stripped, so 「船橋駅」≒「船橋」. */
+function looseKey(s) {
+  return normalize(s).replace(/(駅前|駅|周辺|市|区|町|村|丁目)$/g, "");
+}
+
+function searchLocal(query) {
+  const q = normalize(query);
+  const ql = looseKey(query);
+  if (!q) return [];
+
+  const scored = [];
+  for (const spot of allSpots) {
+    const name = normalize(spot.name);
+    const addr = normalize(spot.address);
+    let score = -1;
+
+    if (name.startsWith(q)) score = 0;
+    else if (name.includes(q)) score = 1;
+    else if (ql && name.includes(ql)) score = 2;
+    else if (addr.includes(q)) score = 3;
+    else if (ql && addr.includes(ql)) score = 4;
+
+    if (score >= 0) scored.push({ spot, score });
+  }
+
+  scored.sort((a, b) => {
+    if (a.score !== b.score) return a.score - b.score;
+    const ref = refPos();
+    if (!ref) return 0;
+    return (
+      haversineDistance(ref, [a.spot.lat, a.spot.lng]) -
+      haversineDistance(ref, [b.spot.lat, b.spot.lng])
+    );
+  });
+
+  return scored.slice(0, MAX_LOCAL_RESULTS).map((s) => s.spot);
+}
+
+async function geocode(query) {
+  const url = `${NOMINATIM_URL}?${new URLSearchParams({
+    q: query,
+    format: "jsonv2",
+    limit: "5",
+    countrycodes: "jp",
+    "accept-language": "ja",
+  })}`;
+  const res = await fetch(url, { headers: { Accept: "application/json" } });
+  if (!res.ok) throw new Error("HTTP " + res.status);
+  const list = await res.json();
+  return list.map((r) => ({
+    label: (r.display_name || "").split(",")[0].trim() || query,
+    detail: r.display_name || "",
+    lat: parseFloat(r.lat),
+    lng: parseFloat(r.lon),
+  }));
+}
+
+function closeSearchResults() {
+  searchResults.hidden = true;
+  searchResults.innerHTML = "";
+  searchInput.setAttribute("aria-expanded", "false");
+}
+
+function addResultRow({ title, subtitle, badge, onPick }) {
+  const li = document.createElement("li");
+  li.className = "search-result";
+  li.setAttribute("role", "option");
+  li.tabIndex = -1;
+
+  const text = document.createElement("div");
+  text.className = "search-result-text";
+  const t = document.createElement("div");
+  t.className = "search-result-title";
+  t.textContent = title;
+  text.appendChild(t);
+  if (subtitle) {
+    const s = document.createElement("div");
+    s.className = "search-result-sub";
+    s.textContent = subtitle;
+    text.appendChild(s);
+  }
+  li.appendChild(text);
+
+  if (badge) {
+    const b = document.createElement("span");
+    b.className = "search-result-badge";
+    b.textContent = badge;
+    li.appendChild(b);
+  }
+
+  li.addEventListener("click", onPick);
+  searchResults.appendChild(li);
+  return li;
+}
+
+/** Focus the map on a spot from the dataset. */
+function gotoSpot(spot) {
+  clearSearchRef();
+  map.setView([spot.lat, spot.lng], 17);
+  const marker = markerBySpotId.get(spot.id);
+  if (marker) marker.openPopup();
+  searchInput.value = "";
+  searchClear.hidden = true;
+  closeSearchResults();
+  setSheetState("peek");
+}
+
+/** Move the reference point to a geocoded place and re-centre on it. */
+function gotoPlace(place) {
+  searchPos = [place.lat, place.lng];
+  searchLabel = place.label;
+  refChipLabel.textContent = place.label;
+  refChip.hidden = false;
+  map.setView(searchPos, 16);
+  searchInput.value = "";
+  searchClear.hidden = true;
+  closeSearchResults();
+  renderMarkers(allSpots);
+  renderList();
+  setSheetState("half");
+
+  // Tell the user what to do next: within range, just confirm. Out of range,
+  // say how far the nearest recorded spot actually is so they can widen the
+  // radius instead of assuming there is nothing at all.
+  const limit = radius > 0 ? radius : Infinity;
+  let nearest = Infinity;
+  for (const s of allSpots) {
+    nearest = Math.min(nearest, haversineDistance(searchPos, [s.lat, s.lng]));
+  }
+  if (nearest <= limit) {
+    setStatus(`${place.label} を基準に表示しています。`);
+  } else if (nearest !== Infinity) {
+    setStatus(
+      `${place.label} の${formatDistance(limit)}以内に収録データがありません（最も近いのは${formatDistance(
+        nearest
+      )}先）。範囲を広げるか🔍でOpenStreetMapから検索できます。`
+    );
+  } else {
+    setStatus(`${place.label} 周辺に収録データがありません。🔍でOpenStreetMapから検索できます。`);
+  }
+}
+
+function clearSearchRef() {
+  if (!isSearchActive()) return;
+  searchPos = null;
+  searchLabel = "";
+  refChip.hidden = true;
+  renderMarkers(allSpots);
+  renderList();
+  setStatus("");
+}
+
+let searchSeq = 0;
+
+async function runSearch(query) {
+  const q = query.trim();
+  searchClear.hidden = q.length === 0;
+  if (!q) {
+    closeSearchResults();
+    return;
+  }
+
+  const seq = ++searchSeq;
+  const local = searchLocal(q);
+
+  searchResults.innerHTML = "";
+  for (const spot of local) {
+    const ref = refPos();
+    addResultRow({
+      title: spot.name,
+      subtitle: spot.address,
+      badge: ref ? formatDistance(haversineDistance(ref, [spot.lat, spot.lng])) : "",
+      onPick: () => gotoSpot(spot),
+    });
+  }
+
+  const pending = addResultRow({
+    title: `「${q}」を地名で検索`,
+    subtitle: "収録データ以外の駅名・地域名を探します",
+    badge: "地名",
+    onPick: () => {},
+  });
+  pending.classList.add("search-result-action");
+
+  searchResults.hidden = false;
+  searchInput.setAttribute("aria-expanded", "true");
+
+  // Geocode in the background and replace the action row with real places.
+  try {
+    const places = await geocode(q);
+    if (seq !== searchSeq) return; // a newer query superseded this one
+    pending.remove();
+    if (places.length === 0) {
+      if (local.length === 0) {
+        addResultRow({ title: "見つかりませんでした", subtitle: "別の駅名・地域名でお試しください" });
+      }
+      return;
+    }
+    for (const place of places) {
+      addResultRow({
+        title: place.label,
+        subtitle: place.detail,
+        badge: "地名",
+        onPick: () => gotoPlace(place),
+      });
+    }
+  } catch (e) {
+    if (seq !== searchSeq) return;
+    pending.querySelector(".search-result-sub").textContent =
+      "地名検索に接続できませんでした（収録データ内は上記のとおり）";
+  }
+}
+
+function setupSearch() {
+  let timer = null;
+  searchInput.addEventListener("input", () => {
+    clearTimeout(timer);
+    const v = searchInput.value;
+    searchClear.hidden = v.trim().length === 0;
+    timer = setTimeout(() => runSearch(v), 250);
+  });
+
+  searchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeSearchResults();
+      searchInput.blur();
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      clearTimeout(timer);
+      const first = searchResults.querySelector(".search-result:not(.search-result-action)");
+      if (first) first.click();
+      else runSearch(searchInput.value);
+    }
+  });
+
+  searchClear.addEventListener("click", () => {
+    searchInput.value = "";
+    searchClear.hidden = true;
+    closeSearchResults();
+    searchInput.focus();
+  });
+
+  refChipClear.addEventListener("click", () => {
+    clearSearchRef();
+    if (userPos) map.setView(userPos, 16);
+  });
+
+  // Tapping the map dismisses the dropdown.
+  map.on("click dragstart", closeSearchResults);
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest(".search-wrap")) closeSearchResults();
+  });
 }
 
 function addSpotAtMapCenter() {
@@ -564,6 +856,7 @@ async function main() {
   initMap();
   setupSegmentedControl();
   setupSheetDrag();
+  setupSearch();
 
   const seedSpots = await loadSeedSpots();
   const userSpots = loadUserSpots();
@@ -571,7 +864,10 @@ async function main() {
   renderMarkers(allSpots);
   renderList();
 
-  locateBtn.addEventListener("click", () => locateUser(true));
+  locateBtn.addEventListener("click", () => {
+    clearSearchRef();
+    locateUser(true);
+  });
   addSpotBtn.addEventListener("click", addSpotAtMapCenter);
   osmBtn.addEventListener("click", fetchOsmForCurrentView);
 
