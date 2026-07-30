@@ -507,6 +507,12 @@ async function fetchYahooForCurrentView() {
 
   try {
     const found = new Map();
+    // TEMPORARY diagnostics: surfaced in the status line so we can tell apart
+    // "Yahoo genuinely has nothing here" from "Yahoo returned an error we were
+    // silently swallowing" or "a parsing mismatch" without needing devtools.
+    const diag = [];
+    let apiError = null;
+
     for (const query of YAHOO_QUERIES) {
       const url = `${YAHOO_LOCALSEARCH_URL}?${new URLSearchParams({
         appid,
@@ -521,10 +527,24 @@ async function fetchYahooForCurrentView() {
       // the browser regardless of the Client ID — JSONP is the documented
       // way around that (same trick already used for HeartRails above).
       const json = await jsonp(url);
-      for (const feature of (json && json.Feature) || []) {
-        const spot = yahooFeatureToSpot(feature);
-        if (spot) found.set(spot.id, spot);
+
+      if (json && json.Error) {
+        apiError = json.Error.Message || JSON.stringify(json.Error);
+        diag.push(`${query}:Error`);
+        continue;
       }
+
+      const total = json && json.ResultInfo ? json.ResultInfo.Total : "?";
+      const features = (json && json.Feature) || [];
+      let parsed = 0;
+      for (const feature of features) {
+        const spot = yahooFeatureToSpot(feature);
+        if (spot) {
+          found.set(spot.id, spot);
+          parsed++;
+        }
+      }
+      diag.push(`${query}:Total=${total},取得=${features.length},解析=${parsed}`);
     }
 
     const known = new Set(allSpots.map((s) => s.id));
@@ -533,8 +553,10 @@ async function fetchYahooForCurrentView() {
       return !allSpots.some((c) => haversineDistance([c.lat, c.lng], [s.lat, s.lng]) <= 60);
     });
 
-    if (fresh.length === 0) {
-      setStatus("この範囲に Yahoo!ロコの追加データはありませんでした。");
+    if (apiError) {
+      setStatus(`Yahoo!ロコがエラーを返しました: ${apiError}`, true);
+    } else if (fresh.length === 0) {
+      setStatus(`この範囲に Yahoo!ロコの追加データはありませんでした。[診断: ${diag.join(" / ")}]`);
     } else {
       allSpots = allSpots.concat(fresh);
       renderMarkers(allSpots);
@@ -542,7 +564,10 @@ async function fetchYahooForCurrentView() {
       setStatus(`Yahoo!ロコから ${fresh.length}件を追加しました（Web Services by Yahoo! JAPAN）`);
     }
   } catch (e) {
-    setStatus("Yahoo!ロコに接続できませんでした。Client IDや通信環境をご確認ください。", true);
+    setStatus(
+      `Yahoo!ロコに接続できませんでした（${e && e.message ? e.message : e}）。Client IDや通信環境をご確認ください。`,
+      true
+    );
   } finally {
     yahooLoading = false;
     yahooBtn.classList.remove("loading");
