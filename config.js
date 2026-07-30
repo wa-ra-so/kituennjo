@@ -14,5 +14,5 @@
 //
 // Leave the string empty to keep the button hidden (the default).
 window.APP_CONFIG = {
-  yahooClientId: "",
+  yahooClientId: "dmVyPTIwMjUwNyZpZD1TQTJFTVZ3T0VLJmhhc2g9TnpkaVl6RmpNV1F5Wmpoak5XSXhPQQ",
 };
