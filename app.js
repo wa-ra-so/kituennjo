@@ -23,7 +23,7 @@ const markerBySpotId = new Map();
 
 function setStatus(msg, isError) {
   statusEl.textContent = msg || "";
-  statusEl.style.color = isError ? "#ff3b30" : "var(--accent-blue)";
+  statusEl.style.color = isError ? "var(--danger)" : "var(--primary)";
 }
 
 function haversineDistance(a, b) {
@@ -218,7 +218,8 @@ function updateUserMarker(lat, lng, accuracy) {
 
   if (accuracy) {
     if (!accuracyCircle) {
-      accuracyCircle = L.circle([lat, lng], { radius: accuracy, color: "#007aff", fillOpacity: 0.08, weight: 1 }).addTo(map);
+      // HeroUI primary (#006FEE)
+      accuracyCircle = L.circle([lat, lng], { radius: accuracy, color: "#006fee", fillOpacity: 0.08, weight: 1 }).addTo(map);
     } else {
       accuracyCircle.setLatLng([lat, lng]).setRadius(accuracy);
     }

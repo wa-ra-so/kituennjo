@@ -84,8 +84,23 @@ GitHub Pagesなどの静的ホスティングにそのまま配置すれば、�
 - `tools/osm.mjs` — 取り込み用の共通ロジック（Overpassクエリ生成・変換・重複排除）
 - `vendor/leaflet/` — 地図描画ライブラリ Leaflet（CDNに依存せずローカル同梱）
 
+## デザイン
+
+UIは [HeroUI](https://heroui.com/) のデザイン言語に沿っています。HeroUI自体はReact専用のライブラリなので、本アプリ（ビルド不要の素のHTML/CSS/JS）では**デザイントークンとコンポーネントの見た目を`style.css`で再現**する形をとっています。値は推測ではなく `@heroui/theme` パッケージから実際に抽出したものです。
+
+| トークン | 値 |
+|---|---|
+| カラー | セマンティックカラー（primary `#006FEE` / success `#17c964` / warning `#f5a524` / danger `#f31260`）、content1–3、divider、focus をライト/ダーク両方 |
+| 角丸 | small 8px / medium 12px / large 14px |
+| 影 | shadow-small / medium / large（ライト・ダークで別の実値） |
+| 文字 | tiny 0.75 / small 0.875 / medium 1 / large 1.125rem＋対応する行間 |
+| その他 | divider 1px、disabled 0.5、hover 0.8、フォーカスリング 2px solid focus・offset 2px |
+
+対応づけたコンポーネント: Card（上部パネル・ポップアップ）、Tabs solid（距離セグメント）、Button isIconOnly radius=full（浮動ボタン）、Drawer bottom（ボトムシート）、Listbox＋divider（喫煙所リスト）、Chip flat（距離バッジ・ポップアップの距離）、Button primary size=sm（ルート案内）。
+
 ## ライセンス・クレジット
 
+- UIデザイン: [HeroUI](https://heroui.com/)（MIT）のデザイントークンを参照
 - 地図タイル: © OpenStreetMap contributors, © CARTO
 - OpenStreetMap 由来の喫煙所データ: © OpenStreetMap contributors（[ODbL](https://opendatacommons.org/licenses/odbl/)）
 - 収録データの各スポットの出典は `sources` フィールドに記載しています
