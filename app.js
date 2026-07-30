@@ -438,60 +438,72 @@ async function fetchOsmForCurrentView() {
 }
 
 // ---------- Search by station / area name ----------
-// Two tiers: the bundled dataset is matched instantly offline, and anything
-// else falls back to Nominatim geocoding so places with no recorded smoking
-// area can still be inspected (then 🔍 pulls OSM data for that area).
+// Deliberately NOT a search over the smoking-spot dataset's own names — the
+// box is for finding a station or area, then browsing whatever is nearby.
+// Two Japan-focused sources, queried in parallel:
+//   1. HeartRails Express — a free, keyless API purpose-built for Japanese
+//      train stations. Called via JSONP so it works regardless of whatever
+//      CORS policy it happens to send (its docs offer `callback` explicitly
+//      for cross-domain browser use, which is the reliable signal here).
+//   2. Nominatim (OpenStreetMap) — general place/address geocoding, for
+//      neighbourhoods, wards, landmarks and anything not literally a station.
 
+const HEARTRAILS_URL = "https://express.heartrails.com/api/json";
 const NOMINATIM_URL = "https://nominatim.openstreetmap.org/search";
-const MAX_LOCAL_RESULTS = 8;
 
-/** Normalise for lenient Japanese matching (full/half width, case, 駅/市区町村). */
-function normalize(s) {
-  return (s || "")
-    .normalize("NFKC")
-    .toLowerCase()
-    .replace(/[\s　]+/g, "");
-}
+/** Load a JSONP endpoint. Needed for HeartRails since we can't confirm its
+ *  CORS headers from this sandbox; a <script> tag sidesteps that entirely. */
+function jsonp(url, param = "callback") {
+  return new Promise((resolve, reject) => {
+    const cbName = `__jsonp_cb_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+    const script = document.createElement("script");
+    const timer = setTimeout(() => {
+      cleanup();
+      reject(new Error("timeout"));
+    }, 8000);
 
-/** Extra key with trailing place-type suffixes stripped, so 「船橋駅」≒「船橋」. */
-function looseKey(s) {
-  return normalize(s).replace(/(駅前|駅|周辺|市|区|町|村|丁目)$/g, "");
-}
+    function cleanup() {
+      clearTimeout(timer);
+      delete window[cbName];
+      script.remove();
+    }
 
-function searchLocal(query) {
-  const q = normalize(query);
-  const ql = looseKey(query);
-  if (!q) return [];
-
-  const scored = [];
-  for (const spot of allSpots) {
-    const name = normalize(spot.name);
-    const addr = normalize(spot.address);
-    let score = -1;
-
-    if (name.startsWith(q)) score = 0;
-    else if (name.includes(q)) score = 1;
-    else if (ql && name.includes(ql)) score = 2;
-    else if (addr.includes(q)) score = 3;
-    else if (ql && addr.includes(ql)) score = 4;
-
-    if (score >= 0) scored.push({ spot, score });
-  }
-
-  scored.sort((a, b) => {
-    if (a.score !== b.score) return a.score - b.score;
-    const ref = refPos();
-    if (!ref) return 0;
-    return (
-      haversineDistance(ref, [a.spot.lat, a.spot.lng]) -
-      haversineDistance(ref, [b.spot.lat, b.spot.lng])
-    );
+    window[cbName] = (data) => {
+      cleanup();
+      resolve(data);
+    };
+    script.onerror = () => {
+      cleanup();
+      reject(new Error("script load failed"));
+    };
+    script.src = `${url}${url.includes("?") ? "&" : "?"}${param}=${cbName}`;
+    document.head.appendChild(script);
   });
-
-  return scored.slice(0, MAX_LOCAL_RESULTS).map((s) => s.spot);
 }
 
-async function geocode(query) {
+/** Japanese train stations matching `query`, via HeartRails Express. */
+async function searchStations(query) {
+  const url = `${HEARTRAILS_URL}?${new URLSearchParams({
+    method: "getStations",
+    name: query,
+  })}`;
+  const data = await jsonp(url);
+  const stations = data && data.response && Array.isArray(data.response.station)
+    ? data.response.station
+    : [];
+  return stations
+    .filter((s) => typeof s.y === "number" && typeof s.x === "number")
+    .map((s) => ({
+      label: `${s.name}駅`,
+      detail: [s.prefecture, s.line].filter(Boolean).join(" ・ "),
+      lat: s.y, // HeartRails: y = latitude, x = longitude
+      lng: s.x,
+      badge: "駅",
+    }));
+}
+
+/** General place/address matches for anything not literally a station. */
+async function searchAreas(query) {
   const url = `${NOMINATIM_URL}?${new URLSearchParams({
     q: query,
     format: "jsonv2",
@@ -507,6 +519,7 @@ async function geocode(query) {
     detail: r.display_name || "",
     lat: parseFloat(r.lat),
     lng: parseFloat(r.lon),
+    badge: "地名",
   }));
 }
 
@@ -548,19 +561,7 @@ function addResultRow({ title, subtitle, badge, onPick }) {
   return li;
 }
 
-/** Focus the map on a spot from the dataset. */
-function gotoSpot(spot) {
-  clearSearchRef();
-  map.setView([spot.lat, spot.lng], 17);
-  const marker = markerBySpotId.get(spot.id);
-  if (marker) marker.openPopup();
-  searchInput.value = "";
-  searchClear.hidden = true;
-  closeSearchResults();
-  setSheetState("peek");
-}
-
-/** Move the reference point to a geocoded place and re-centre on it. */
+/** Move the reference point to a searched station/place and re-centre on it. */
 function gotoPlace(place) {
   searchPos = [place.lat, place.lng];
   searchLabel = place.label;
@@ -616,53 +617,58 @@ async function runSearch(query) {
   }
 
   const seq = ++searchSeq;
-  const local = searchLocal(q);
-
   searchResults.innerHTML = "";
-  for (const spot of local) {
-    const ref = refPos();
-    addResultRow({
-      title: spot.name,
-      subtitle: spot.address,
-      badge: ref ? formatDistance(haversineDistance(ref, [spot.lat, spot.lng])) : "",
-      onPick: () => gotoSpot(spot),
-    });
-  }
-
-  const pending = addResultRow({
-    title: `「${q}」を地名で検索`,
-    subtitle: "収録データ以外の駅名・地域名を探します",
-    badge: "地名",
-    onPick: () => {},
-  });
-  pending.classList.add("search-result-action");
-
+  const loading = addResultRow({ title: "検索中…", subtitle: `「${q}」の駅・地名を探しています` });
+  loading.classList.add("search-result-action");
   searchResults.hidden = false;
   searchInput.setAttribute("aria-expanded", "true");
 
-  // Geocode in the background and replace the action row with real places.
-  try {
-    const places = await geocode(q);
-    if (seq !== searchSeq) return; // a newer query superseded this one
-    pending.remove();
-    if (places.length === 0) {
-      if (local.length === 0) {
-        addResultRow({ title: "見つかりませんでした", subtitle: "別の駅名・地域名でお試しください" });
-      }
-      return;
-    }
-    for (const place of places) {
+  const [stationResult, areaResult] = await Promise.allSettled([
+    searchStations(q),
+    searchAreas(q),
+  ]);
+  if (seq !== searchSeq) return; // a newer query superseded this one
+  loading.remove();
+
+  const stations = stationResult.status === "fulfilled" ? stationResult.value : [];
+  const areas = areaResult.status === "fulfilled" ? areaResult.value : [];
+
+  // Stations first — that's the more precise, purpose-built match — then
+  // general areas, deduping places that landed on effectively the same spot.
+  const rows = [...stations, ...areas].filter((place, i, arr) => {
+    return !arr
+      .slice(0, i)
+      .some((p) => haversineDistance([p.lat, p.lng], [place.lat, place.lng]) < 30);
+  });
+
+  if (rows.length === 0) {
+    const stationFailed = stationResult.status === "rejected";
+    const areaFailed = areaResult.status === "rejected";
+    if (stationFailed && areaFailed) {
       addResultRow({
-        title: place.label,
-        subtitle: place.detail,
-        badge: "地名",
-        onPick: () => gotoPlace(place),
+        title: "検索に接続できませんでした",
+        subtitle: "通信環境をご確認のうえ、もう一度お試しください",
       });
+    } else {
+      addResultRow({ title: "見つかりませんでした", subtitle: "別の駅名・地域名でお試しください" });
     }
-  } catch (e) {
-    if (seq !== searchSeq) return;
-    pending.querySelector(".search-result-sub").textContent =
-      "地名検索に接続できませんでした（収録データ内は上記のとおり）";
+    return;
+  }
+
+  for (const place of rows) {
+    addResultRow({
+      title: place.label,
+      subtitle: place.detail,
+      badge: place.badge,
+      onPick: () => gotoPlace(place),
+    });
+  }
+
+  // One of the two sources failed but the other still had results — say so
+  // briefly rather than silently showing a partial list.
+  if (stationResult.status === "rejected" || areaResult.status === "rejected") {
+    const which = stationResult.status === "rejected" ? "駅名検索" : "地名検索";
+    addResultRow({ title: `${which}に接続できませんでした`, subtitle: "上記は別ソースの結果です" });
   }
 }
 
