@@ -517,10 +517,11 @@ async function fetchYahooForCurrentView() {
         results: "20",
         output: "json",
       })}`;
-      const res = await fetch(url);
-      if (!res.ok) throw new Error("HTTP " + res.status);
-      const json = await res.json();
-      for (const feature of json.Feature || []) {
+      // YOLP does not send CORS headers, so a plain fetch() always fails in
+      // the browser regardless of the Client ID — JSONP is the documented
+      // way around that (same trick already used for HeartRails above).
+      const json = await jsonp(url);
+      for (const feature of (json && json.Feature) || []) {
         const spot = yahooFeatureToSpot(feature);
         if (spot) found.set(spot.id, spot);
       }
