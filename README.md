@@ -48,6 +48,25 @@ node tools/import-osm.mjs --from saved.json # 保存済みのOverpassレスポ�
 
 収録済みのデータが上書きされることはありません。同じidのもの、および既存スポットから60m以内のものはスキップされます。
 
+## Yahoo!ロコからの追加取得（商業施設内の喫煙所向け）
+
+OSMの`amenity=smoking_area`は、駅前や公園など屋外の指定喫煙所には強い一方、**デパートやショッピングモールの中にある喫煙室はほぼ登録されていません**（例: シャポー船橋 南館3F・4Fの喫煙所）。こうした施設はOSMでは一般の商業施設として、あるいは全く地図に載っていないことが多いためです。
+
+これを補うため、[Yahoo!ローカルサーチAPI](https://developer.yahoo.co.jp/webapi/map/openlocalplatform/v1/localsearch.html)（YOLP）と連携するオプション機能を用意しています。**設定しない限り機能自体が非表示**になるので、何もしなければ従来どおり動作します。
+
+### 有効にする方法
+
+1. [Yahoo!デベロッパーネットワーク](https://e.developer.yahoo.co.jp/register)で無料のClient ID（アプリケーションID）を取得する（クレジットカード登録は不要）
+2. `config.js` の `yahooClientId` に取得したClient IDを貼り付ける
+3. コミット・プッシュすると、地図右下に赤い「Y!」ボタンが現れる。押すと表示中の範囲を「喫煙所」「喫煙室」「喫煙スペース」の3キーワードで検索し、赤いピンとして追加する
+
+### 知っておいてほしいこと
+
+- **無料枠は1日5万リクエストまで**（アプリケーション単位）。超過するとYahoo!の判断で利用制限がかかることがあります。
+- **クレジット表示義務**: Yahoo! Web APIの利用規約により「Web Services by Yahoo! JAPAN」の表示が必要です。取得した際のステータス表示に含めています。
+- **Client IDは公開されます**: このアプリはビルド不要の静的サイトなので、`config.js` の中身はそのまま全訪問者のブラウザに配信されます（view-source / devtoolsで誰でも見られます）。Yahoo!のClient IDには課金が紐づいていないため、悪用されても発生するのは「自分の無料枠が消費される」ことであり、身に覚えのない請求が来るわけではありませんが、それでも公開情報として扱ってください。
+- **未検証の実装です**: このAPIは実際のClient IDでのテストができていません（開発環境のネットワークポリシーで `map.yahooapis.jp` への通信がブロックされているため）。公式ドキュメントと公開されているサンプルコードを基に実装していますが、実際のレスポンス形式が想定と異なる場合、フィールド名の解釈がずれて正しく表示されない可能性があります。有効化して動作がおかしい場合は、その旨を教えてください。
+
 ## データについて
 
 `data/smoking-spots.json` に初期データとして、47都道府県すべての県庁所在地・主要駅周辺の喫煙所を1件以上収録しています（合計205件）。
@@ -93,6 +112,7 @@ GitHub Pagesなどの静的ホスティングにそのまま配置すれば、�
 ## 構成
 
 - `index.html` / `style.css` / `app.js` — アプリ本体
+- `config.js` — Yahoo!ロコ連携用のClient ID設定（空なら機能は非表示）
 - `data/smoking-spots.json` — 喫煙所の初期データ
 - `tools/import-osm.mjs` — OpenStreetMap からデータを取り込むCLI
 - `tools/osm.mjs` — 取り込み用の共通ロジック（Overpassクエリ生成・変換・重複排除）
@@ -119,4 +139,5 @@ UIは [HeroUI](https://heroui.com/) のデザイン言語に沿っています�
 - 駅名検索: [HeartRails Express](https://express.heartrails.com/api.html)
 - 地名検索: [Nominatim](https://nominatim.org/)（OpenStreetMap）
 - OpenStreetMap 由来の喫煙所データ: © OpenStreetMap contributors（[ODbL](https://opendatacommons.org/licenses/odbl/)）
+- Yahoo!ロコ連携（任意）: Web Services by Yahoo! JAPAN
 - 収録データの各スポットの出典は `sources` フィールドに記載しています

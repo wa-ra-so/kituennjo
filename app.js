@@ -11,6 +11,7 @@ const sheet = document.getElementById("sheet");
 const sheetHandle = document.getElementById("sheet-handle");
 const fabStack = document.querySelector(".fab-stack");
 const osmBtn = document.getElementById("osm-btn");
+const yahooBtn = document.getElementById("yahoo-btn");
 const searchInput = document.getElementById("search-input");
 const searchClear = document.getElementById("search-clear");
 const searchResults = document.getElementById("search-results");
@@ -129,8 +130,8 @@ function initMap() {
   }
 }
 
-function pinIcon(isUserAdded, isOsm) {
-  const variant = isUserAdded ? " user-added" : isOsm ? " osm" : "";
+function pinIcon(isUserAdded, isOsm, isYahoo) {
+  const variant = isUserAdded ? " user-added" : isOsm ? " osm" : isYahoo ? " yahoo" : "";
   return L.divIcon({
     className: "",
     html: `<div class="smoke-pin${variant}"><span>🚬</span></div>`,
@@ -145,7 +146,7 @@ function renderMarkers(spots) {
   markerBySpotId.clear();
   spots.forEach((spot) => {
     const marker = L.marker([spot.lat, spot.lng], {
-      icon: pinIcon(spot.type === "ユーザー登録", spot.osm),
+      icon: pinIcon(spot.type === "ユーザー登録", spot.osm, spot.yahoo),
     });
     marker.bindPopup(popupHtml(spot));
     marker.addTo(markerLayer);
@@ -435,6 +436,116 @@ async function fetchOsmForCurrentView() {
   renderMarkers(allSpots);
   renderList();
   setStatus(`OpenStreetMap から ${fresh.length}件を追加しました（データ © OSM contributors）`);
+}
+
+// ---------- Yahoo!ロコ (YOLP LocalSearch) lookup ----------
+// OSM's amenity=smoking_area tag is almost never used for smoking rooms
+// tucked inside department stores and shopping malls (e.g. シャポー船橋) —
+// those exist as ordinary business listings, which OSM in Japan maps very
+// thinly. Yahoo!'s local business database covers this gap far better, so
+// this is a second, optional source for exactly that kind of "hidden" spot.
+//
+// Requires a free Yahoo! JAPAN Client ID (config.js) — the button stays
+// hidden until one is configured. Note: this integration could not be
+// tested against the live API from this environment (the sandbox's network
+// policy blocks map.yahooapis.jp), so it's implemented from YOLP's
+// documentation and public sample code rather than a verified live call.
+
+const YAHOO_LOCALSEARCH_URL = "https://map.yahooapis.jp/search/local/V1/localSearch";
+// Multiple keywords because a single "smoking area" listing might be filed
+// under any of these in Yahoo's local business categories.
+const YAHOO_QUERIES = ["喫煙所", "喫煙室", "喫煙スペース"];
+
+let yahooLoading = false;
+
+function yahooClientId() {
+  return (window.APP_CONFIG && window.APP_CONFIG.yahooClientId) || "";
+}
+
+/** Convert one YOLP Feature into our spot shape. Defensive about field
+ *  names since this has not been exercised against a live response. */
+function yahooFeatureToSpot(feature) {
+  const coords = feature.Geometry && feature.Geometry.Coordinates;
+  if (!coords) return null;
+  const [lngStr, latStr] = String(coords).split(","); // YOLP: "lon,lat"
+  const lat = parseFloat(latStr);
+  const lng = parseFloat(lngStr);
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+
+  const prop = feature.Property || {};
+  const name = feature.Name || prop.Name || "喫煙所（Yahoo!ロコ）";
+  const address = prop.Address || prop.CassetteAddress || "";
+
+  return {
+    id: `yahoo-${feature.Id || `${lat.toFixed(6)}_${lng.toFixed(6)}`}`,
+    name,
+    lat,
+    lng,
+    address,
+    type: "屋内/屋外（Yahoo!ロコ）",
+    sources: ["Yahoo!ロコ検索（Web Services by Yahoo! JAPAN） https://map.yahoo.co.jp/"],
+    yahoo: true,
+  };
+}
+
+async function fetchYahooForCurrentView() {
+  const appid = yahooClientId();
+  if (!appid || yahooLoading) return;
+
+  const b = map.getBounds();
+  const center = b.getCenter();
+  // Radius covering the visible viewport, capped so one tap can't sweep an
+  // unexpectedly huge area (and stay well inside typical free-tier limits).
+  const dist = Math.min(
+    3,
+    Math.max(0.3, haversineDistance([center.lat, center.lng], [b.getNorth(), b.getEast()]) / 1000)
+  );
+
+  yahooLoading = true;
+  yahooBtn.classList.add("loading");
+  setStatus("Yahoo!ロコから周辺の喫煙所を検索中…");
+
+  try {
+    const found = new Map();
+    for (const query of YAHOO_QUERIES) {
+      const url = `${YAHOO_LOCALSEARCH_URL}?${new URLSearchParams({
+        appid,
+        lat: String(center.lat),
+        lon: String(center.lng),
+        dist: dist.toFixed(2),
+        query,
+        results: "20",
+        output: "json",
+      })}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      const json = await res.json();
+      for (const feature of json.Feature || []) {
+        const spot = yahooFeatureToSpot(feature);
+        if (spot) found.set(spot.id, spot);
+      }
+    }
+
+    const known = new Set(allSpots.map((s) => s.id));
+    const fresh = [...found.values()].filter((s) => {
+      if (known.has(s.id)) return false;
+      return !allSpots.some((c) => haversineDistance([c.lat, c.lng], [s.lat, s.lng]) <= 60);
+    });
+
+    if (fresh.length === 0) {
+      setStatus("この範囲に Yahoo!ロコの追加データはありませんでした。");
+    } else {
+      allSpots = allSpots.concat(fresh);
+      renderMarkers(allSpots);
+      renderList();
+      setStatus(`Yahoo!ロコから ${fresh.length}件を追加しました（Web Services by Yahoo! JAPAN）`);
+    }
+  } catch (e) {
+    setStatus("Yahoo!ロコに接続できませんでした。Client IDや通信環境をご確認ください。", true);
+  } finally {
+    yahooLoading = false;
+    yahooBtn.classList.remove("loading");
+  }
 }
 
 // ---------- Search by station / area name ----------
@@ -876,6 +987,11 @@ async function main() {
   });
   addSpotBtn.addEventListener("click", addSpotAtMapCenter);
   osmBtn.addEventListener("click", fetchOsmForCurrentView);
+
+  if (yahooClientId()) {
+    yahooBtn.hidden = false;
+    yahooBtn.addEventListener("click", fetchYahooForCurrentView);
+  }
 
   locateUser(true);
 }

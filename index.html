@@ -53,6 +53,9 @@
     <button id="osm-btn" class="fab" title="この範囲をOpenStreetMapから検索" aria-label="OSM検索">
       <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0A4.5 4.5 0 1 1 14 9.5 4.49 4.49 0 0 1 9.5 14z"/></svg>
     </button>
+    <button id="yahoo-btn" class="fab fab-yahoo" title="この範囲をYahoo!ロコから検索（商業施設内の喫煙所向け）" aria-label="Yahoo!ロコ検索" hidden>
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><text x="12" y="17" text-anchor="middle" font-size="15" font-weight="700" fill="currentColor">Y!</text></svg>
+    </button>
     <button id="locate-btn" class="fab fab-primary" title="現在地に戻る" aria-label="現在地">
       <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm8.94 3A9.01 9.01 0 0 0 13 3.06V1h-2v2.06A9.01 9.01 0 0 0 3.06 11H1v2h2.06A9.01 9.01 0 0 0 11 20.94V23h2v-2.06A9.01 9.01 0 0 0 20.94 13H23v-2h-2.06zM12 19a7 7 0 1 1 0-14 7 7 0 0 1 0 14z"/></svg>
     </button>
@@ -83,6 +86,7 @@
   </template>
 
   <script src="vendor/leaflet/leaflet.js"></script>
+  <script src="config.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

@@ -449,6 +449,16 @@ a {
   color: var(--primary-foreground);
 }
 
+/* Yahoo!'s own brand red, kept distinct from the HeroUI danger token so it
+   reads as "that's Yahoo" rather than "something's wrong". */
+.fab-yahoo {
+  color: #ff0033;
+}
+
+.fab-yahoo svg text {
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", sans-serif;
+}
+
 .fab.loading {
   opacity: var(--disabled-opacity);
   pointer-events: none;
@@ -723,13 +733,17 @@ a {
   line-height: 1;
 }
 
-/* provenance: blue = added by you, orange = OpenStreetMap */
+/* provenance: blue = added by you, orange = OpenStreetMap, red = Yahoo!ロコ */
 .smoke-pin.user-added {
   background: var(--primary);
 }
 
 .smoke-pin.osm {
   background: var(--warning);
+}
+
+.smoke-pin.yahoo {
+  background: var(--danger);
 }
 
 /* ---------- Leaflet overrides ---------- */
