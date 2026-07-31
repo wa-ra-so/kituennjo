@@ -2431,5 +2431,144 @@
       "板橋区公式（公衆喫煙所について） https://www.city.itabashi.tokyo.jp/bousai/kougai/bika/kitsuen/1019824.html",
       "CLUB JT（板橋区） https://www.clubjt.jp/place/spot/pref-13/city-13019/"
     ]
+  },
+  {
+    "id": "tokyo-yaekita-gransta",
+    "name": "グランスタ八重北 喫煙所",
+    "lat": 35.6808,
+    "lng": 139.77,
+    "address": "東京都千代田区丸の内1丁目 東京駅八重洲北口 グランスタ八重北2階（10:00-23:30・定員約8名）",
+    "type": "屋内（改札外・エキナカ）",
+    "sources": [
+      "JREメディア（東京駅の喫煙所21選） https://media.jreast.co.jp/articles/652",
+      "まっぷるウェブ（東京駅の喫煙所案内） https://www.mapple.net/original/490633/"
+    ]
+  },
+  {
+    "id": "tokyo-shinkansen-tohoku-joetsu",
+    "name": "東京駅新幹線ホーム喫煙所（東北・上越・北陸新幹線 20-23番線）",
+    "lat": 35.6812,
+    "lng": 139.7703,
+    "address": "東京都千代田区丸の内1丁目 東京駅 20-23番線ホーム改札内（計4か所）",
+    "type": "屋内（改札内・エキナカ）",
+    "sources": [
+      "JREメディア（東京駅の喫煙所21選） https://media.jreast.co.jp/articles/652",
+      "VapePenZone Japan（東京駅新幹線ホーム喫煙所） https://www.vapepenzone.jp/smoking-zone/shinkansen.html"
+    ]
+  },
+  {
+    "id": "tokyo-shinkansen-tokaido-sanyo",
+    "name": "東京駅新幹線ホーム喫煙所（東海道・山陽新幹線 14-19番線）",
+    "lat": 35.6797,
+    "lng": 139.7698,
+    "address": "東京都千代田区丸の内1丁目 東京駅 14-19番線ホーム改札内（計3か所）",
+    "type": "屋内（改札内・エキナカ）",
+    "sources": [
+      "JREメディア（東京駅の喫煙所21選） https://media.jreast.co.jp/articles/652",
+      "VapePenZone Japan（東京駅新幹線ホーム喫煙所） https://www.vapepenzone.jp/smoking-zone/shinkansen.html"
+    ]
+  },
+  {
+    "id": "shinagawa-ecute-south-tameals",
+    "name": "エキュート品川サウス TAMEALS（喫煙可）",
+    "lat": 35.6283,
+    "lng": 139.739,
+    "address": "東京都港区港南2丁目 品川駅改札内 エキュート品川サウス",
+    "type": "屋内（改札内・エキナカ）",
+    "sources": [
+      "東京ルッチ（品川駅の喫煙所ナビ） https://tokyolucci.jp/shinagawa-kitsuenjo",
+      "relazo（品川駅の無料喫煙所&カフェ） https://relazo.net/smokespot_shinagawa/"
+    ]
+  },
+  {
+    "id": "shinjuku-chuo-kaisatsu-becks",
+    "name": "新宿駅中央改札内 BECK'S COFFEE SHOP 新宿店（喫煙可）",
+    "lat": 35.69,
+    "lng": 139.7003,
+    "address": "東京都新宿区新宿3丁目 新宿駅中央改札内",
+    "type": "屋内（改札内・エキナカ）",
+    "sources": [
+      "バシャウマ（新宿駅改札内でタバコが吸える場所） https://basyauma.com/post-600/",
+      "favy（新宿駅 喫煙できるカフェまとめ） https://www.favy.jp/topics/33234"
+    ]
+  },
+  {
+    "id": "shinjuku-platform-9-10",
+    "name": "新宿駅改札内9・10番線ホーム 喫煙スペース",
+    "lat": 35.6898,
+    "lng": 139.7,
+    "address": "東京都新宿区新宿3丁目 新宿駅9・10番線ホーム改札内",
+    "type": "屋内（改札内・エキナカ）",
+    "sources": [
+      "バシャウマ（新宿駅改札内でタバコが吸える場所） https://basyauma.com/post-600/"
+    ]
+  },
+  {
+    "id": "ikebukuro-kita-kaisatsu-becks",
+    "name": "池袋駅北改札内 BECK'S COFFEE SHOP 池袋北口店（喫煙可）",
+    "lat": 35.7297,
+    "lng": 139.71,
+    "address": "東京都豊島区南池袋1丁目 池袋駅北改札内（6:30-22:00）",
+    "type": "屋内（改札内・エキナカ）",
+    "sources": [
+      "CLUB JT（池袋駅の喫煙所・喫煙可能なカフェ） https://www.clubjt.jp/place/spot/pref-13/city-13016/area-1295/"
+    ]
+  },
+  {
+    "id": "ikebukuro-metropolitan-kaisatsu-becks",
+    "name": "池袋駅メトロポリタン口改札内 BECK'S COFFEE SHOP（加熱式たばこ可）",
+    "lat": 35.7288,
+    "lng": 139.7098,
+    "address": "東京都豊島区南池袋1丁目 池袋駅メトロポリタン口改札内",
+    "type": "屋内（改札内・エキナカ・加熱式専用）",
+    "sources": [
+      "CLUB JT（池袋駅周辺の加熱式たばこスポット） https://www.clubjt.jp/place/spot/pref-13/city-13016/area-1295/kanetsushiki/"
+    ]
+  },
+  {
+    "id": "omiya-shinkansen-17-18",
+    "name": "大宮駅新幹線17・18番線ホーム 喫煙室",
+    "lat": 35.9075,
+    "lng": 139.6238,
+    "address": "埼玉県さいたま市大宮区錦町 大宮駅17・18番線ホーム改札内（新潟・仙台方面寄り端・ガラス張り密閉型）",
+    "type": "屋内（改札内・エキナカ）",
+    "sources": [
+      "Tokyo Garden（大宮駅新幹線ホーム喫煙所完全ガイド） https://tokyo-garden.jpn.org/life/smoking-area/omiya-station-shinkansen-smoking-area/",
+      "VapePenZone Japan（大宮駅喫煙所完全ガイド） https://www.vapepenzone.jp/smoking-zone/omiya-station-smoking-areas.html"
+    ]
+  },
+  {
+    "id": "ueno-ecute-upcafe",
+    "name": "エキュート上野 アップカフェ（喫煙可）",
+    "lat": 35.7141,
+    "lng": 139.7774,
+    "address": "東京都台東区上野7丁目 上野駅3階 エキュート上野内（改札内直通エレベーターあり・6:30-23:00）",
+    "type": "屋内（改札内・エキナカ）",
+    "sources": [
+      "JREメディア（上野駅周辺の喫煙所を紹介） https://media.jreast.co.jp/articles/693",
+      "kurashi-no（上野駅周辺の喫煙所17選） https://kurashi-no.jp/I0020679"
+    ]
+  },
+  {
+    "id": "ueno-chuo-kaisatsu-becks",
+    "name": "上野駅中央改札内13番線 BECK'S COFFEE SHOP 上野中央口（加熱式たばこ可）",
+    "lat": 35.7135,
+    "lng": 139.777,
+    "address": "東京都台東区上野7丁目 上野駅中央改札内13番線ホーム東京方面",
+    "type": "屋内（改札内・エキナカ・加熱式専用）",
+    "sources": [
+      "JREメディア（上野駅周辺の喫煙所を紹介） https://media.jreast.co.jp/articles/693"
+    ]
+  },
+  {
+    "id": "yokohama-ekinia-tobacco",
+    "name": "エキニア横浜 THE TOBACCO YOKOHAMA STATION",
+    "lat": 35.4665,
+    "lng": 139.6185,
+    "address": "神奈川県横浜市西区南幸1丁目 エキニア横浜 地下1階",
+    "type": "屋内（駅直結・エキナカ）",
+    "sources": [
+      "カナロコ by 神奈川新聞（横浜西口エキニア横浜に喫煙所） https://www.kanaloco.jp/news/economy/article-1007136.html"
+    ]
   }
 ]
