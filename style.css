@@ -474,6 +474,91 @@ a {
   }
 }
 
+/* ---------- Add-spot placement mode ----------
+   A fixed pin at the exact viewport centre, matching the marker iconAnchor
+   ([15, 28] of a 30x30 icon) exactly — what you see lined up here is exactly
+   where map.getCenter() will place the new spot. */
+
+.place-crosshair {
+  position: fixed;
+  left: calc(50% - 15px);
+  top: calc(50% - 28px);
+  width: 30px;
+  height: 30px;
+  z-index: 600;
+  pointer-events: none;
+}
+
+.place-pin {
+  background: var(--primary);
+  animation: place-pin-bounce 1s ease-in-out infinite;
+}
+
+@keyframes place-pin-bounce {
+  0%,
+  100% {
+    transform: rotate(-45deg) translateY(0);
+  }
+  50% {
+    transform: rotate(-45deg) translateY(-6px);
+  }
+}
+
+.place-bar {
+  position: fixed;
+  left: 14px;
+  right: 14px;
+  bottom: calc(var(--sheet-height, 34px) + 16px);
+  z-index: 600;
+  background: var(--content1);
+  border-radius: var(--radius-large);
+  box-shadow: var(--shadow-large);
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  transition: bottom 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.place-bar-hint {
+  font-size: var(--text-small);
+  line-height: var(--lh-small);
+  color: var(--content1-foreground);
+}
+
+.place-bar-actions {
+  display: flex;
+  gap: 8px;
+  flex: none;
+}
+
+.place-btn {
+  border: none;
+  border-radius: 9999px;
+  padding: 8px 14px;
+  font-size: var(--text-tiny);
+  font-weight: 600;
+  white-space: nowrap;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.place-btn:hover {
+  opacity: var(--hover-opacity);
+}
+
+.place-btn-cancel {
+  background: var(--content2);
+  color: var(--content2-foreground);
+}
+
+.place-btn-confirm {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
 /* ---------- Bottom sheet (HeroUI Drawer placement="bottom") ---------- */
 
 .sheet {
@@ -665,6 +750,26 @@ a {
   opacity: var(--hover-opacity);
 }
 
+/* HeroUI Button, color="danger" variant="flat" size="sm" */
+.spot-delete {
+  font-size: var(--text-tiny);
+  line-height: 1;
+  color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 12%, transparent);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 9999px;
+  font-weight: 500;
+  white-space: nowrap;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.spot-delete:hover {
+  opacity: var(--hover-opacity);
+}
+
 .empty-message {
   padding: 24px 8px;
   font-size: var(--text-small);
@@ -852,5 +957,27 @@ a {
 }
 
 .popup-link:hover {
+  opacity: var(--hover-opacity);
+}
+
+/* HeroUI Button, color="danger" variant="flat" size="sm" */
+.popup-delete {
+  display: inline-block;
+  margin-top: 8px;
+  margin-left: 6px;
+  border: none;
+  color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 12%, transparent);
+  padding: 8px 14px;
+  border-radius: 9999px;
+  font-size: var(--text-tiny);
+  line-height: 1;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.popup-delete:hover {
   opacity: var(--hover-opacity);
 }

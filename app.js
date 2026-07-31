@@ -6,6 +6,10 @@ const listEl = document.getElementById("spot-list");
 const segmented = document.getElementById("radius-segmented");
 const locateBtn = document.getElementById("locate-btn");
 const addSpotBtn = document.getElementById("add-spot-btn");
+const placeCrosshair = document.getElementById("place-crosshair");
+const placeBar = document.getElementById("place-bar");
+const placeConfirmBtn = document.getElementById("place-confirm");
+const placeCancelBtn = document.getElementById("place-cancel");
 const itemTemplate = document.getElementById("spot-item-template");
 const sheet = document.getElementById("sheet");
 const sheetHandle = document.getElementById("sheet-handle");
@@ -146,12 +150,16 @@ function renderMarkers(spots) {
   markerBySpotId.clear();
   spots.forEach((spot) => {
     const marker = L.marker([spot.lat, spot.lng], {
-      icon: pinIcon(spot.type === "ユーザー登録", spot.osm, spot.yahoo),
+      icon: pinIcon(isUserSpot(spot), spot.osm, spot.yahoo),
     });
     marker.bindPopup(popupHtml(spot));
     marker.addTo(markerLayer);
     markerBySpotId.set(spot.id, marker);
   });
+}
+
+function isUserSpot(spot) {
+  return spot.type === "ユーザー登録";
 }
 
 function popupHtml(spot) {
@@ -161,12 +169,16 @@ function popupHtml(spot) {
     : "";
   const distLabel = isSearchActive() ? escapeHtml(searchLabel) + "から" : "現在地から";
   const dirUrl = `https://www.google.com/maps/dir/?api=1&destination=${spot.lat},${spot.lng}`;
+  const deleteBtn = isUserSpot(spot)
+    ? `<button class="popup-delete" type="button" data-spot-id="${escapeHtml(spot.id)}">削除</button>`
+    : "";
   return `
     <div>
       <div class="popup-title">${escapeHtml(spot.name)}</div>
       <div class="popup-address">${escapeHtml(spot.address || "")}</div>
       ${distText ? `<div class="popup-distance">${distLabel} ${distText}</div>` : ""}
       <a class="popup-link" href="${dirUrl}" target="_blank" rel="noopener">ルート案内</a>
+      ${deleteBtn}
     </div>
   `;
 }
@@ -211,9 +223,17 @@ function renderList() {
       spot.distance != null ? formatDistance(spot.distance) : "";
     const dirLink = node.querySelector(".spot-directions");
     dirLink.href = `https://www.google.com/maps/dir/?api=1&destination=${spot.lat},${spot.lng}`;
+    const deleteBtn = node.querySelector(".spot-delete");
+    if (isUserSpot(spot)) {
+      deleteBtn.hidden = false;
+      deleteBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        deleteUserSpot(spot.id);
+      });
+    }
     const item = node.querySelector(".spot-item");
     item.addEventListener("click", (e) => {
-      if (e.target === dirLink) return;
+      if (e.target === dirLink || e.target === deleteBtn) return;
       map.setView([spot.lat, spot.lng], 17);
       const marker = markerBySpotId.get(spot.id);
       if (marker) marker.openPopup();
@@ -850,10 +870,40 @@ function setupSearch() {
   });
 }
 
-function addSpotAtMapCenter() {
+// ---------- Add-spot placement mode ----------
+// Panning the whole map to line an invisible centre point up with a real
+// location is hard to do precisely on a phone. Instead we show a pin fixed
+// at the exact viewport centre (matching the marker iconAnchor pixel-for-
+// pixel) and let the user pan the map underneath it until it visually sits
+// on the right spot, then confirm — what you see is what you get.
+
+let placingSpot = false;
+let sheetStateBeforePlacing = null;
+
+function enterPlacementMode() {
+  if (placingSpot) return;
+  placingSpot = true;
+  sheetStateBeforePlacing = sheetState;
+  setSheetState("collapsed");
+  fabStack.hidden = true;
+  placeCrosshair.hidden = false;
+  placeBar.hidden = false;
+}
+
+function exitPlacementMode() {
+  placingSpot = false;
+  placeCrosshair.hidden = true;
+  placeBar.hidden = true;
+  fabStack.hidden = false;
+  if (sheetStateBeforePlacing) setSheetState(sheetStateBeforePlacing);
+  sheetStateBeforePlacing = null;
+}
+
+function confirmPlacement() {
+  const center = map.getCenter();
+  exitPlacementMode();
   const name = prompt("喫煙所の名前を入力してください（例：〇〇駅前 喫煙所）");
   if (!name) return;
-  const center = map.getCenter();
   const spot = {
     id: "user-" + Date.now(),
     name,
@@ -870,6 +920,15 @@ function addSpotAtMapCenter() {
   renderMarkers(allSpots);
   renderList();
   setStatus("喫煙所を追加しました。");
+}
+
+function deleteUserSpot(id) {
+  if (!confirm("この喫煙所を削除しますか？")) return;
+  saveUserSpots(loadUserSpots().filter((s) => s.id !== id));
+  allSpots = allSpots.filter((s) => s.id !== id);
+  renderMarkers(allSpots);
+  renderList();
+  setStatus("喫煙所を削除しました。");
 }
 
 function setupSegmentedControl() {
@@ -902,17 +961,20 @@ function computeSheetHeights() {
 
   // Leave room so the floating buttons (which sit just above the sheet)
   // never climb up far enough to overlap the title/segmented-control panel.
+  // The button count varies (the Yahoo button only shows up once a Client ID
+  // is configured), so measure what's actually visible rather than assuming.
   const titlePanel = document.querySelector(".title-panel");
   const titleBottom = titlePanel ? titlePanel.getBoundingClientRect().bottom : 0;
-  const fabStackHeight = 44 * 2 + 12; // two 44px buttons + gap
+  const visibleFabs = fabStack.querySelectorAll(".fab:not([hidden])").length;
+  const fabStackHeight = visibleFabs * 44 + Math.max(0, visibleFabs - 1) * 10;
   const margin = 32; // breathing room above the title panel and below the fabs
-  const maxFullBySpace = vh - titleBottom - fabStackHeight - margin;
+  const maxBySpace = vh - titleBottom - fabStackHeight - margin;
 
   sheetHeights = {
     collapsed: COLLAPSED_HEIGHT,
     peek: 150,
-    half,
-    full: Math.max(half + 40, Math.min(Math.round(vh * 0.82), maxFullBySpace)),
+    half: Math.min(half, Math.max(COLLAPSED_HEIGHT, maxBySpace)),
+    full: Math.max(half + 40, Math.min(Math.round(vh * 0.82), maxBySpace)),
   };
 }
 
@@ -1011,12 +1073,22 @@ async function main() {
     clearSearchRef();
     locateUser(true);
   });
-  addSpotBtn.addEventListener("click", addSpotAtMapCenter);
+  addSpotBtn.addEventListener("click", enterPlacementMode);
+  placeConfirmBtn.addEventListener("click", confirmPlacement);
+  placeCancelBtn.addEventListener("click", exitPlacementMode);
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".popup-delete");
+    if (btn) deleteUserSpot(btn.dataset.spotId);
+  });
   osmBtn.addEventListener("click", fetchOsmForCurrentView);
 
   if (yahooClientId()) {
     yahooBtn.hidden = false;
     yahooBtn.addEventListener("click", fetchYahooForCurrentView);
+    // The Yahoo button changes how many FABs are stacked, which changes how
+    // much room the sheet can safely take — recompute now that it's shown.
+    computeSheetHeights();
+    setSheetState(sheetState);
   }
 
   locateUser(true);

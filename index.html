@@ -46,6 +46,18 @@
     </div>
   </div>
 
+  <div id="place-crosshair" class="place-crosshair" hidden aria-hidden="true">
+    <div class="smoke-pin place-pin"><span>🚬</span></div>
+  </div>
+
+  <div id="place-bar" class="place-bar" hidden>
+    <span class="place-bar-hint">地図を動かして場所を合わせてください</span>
+    <div class="place-bar-actions">
+      <button id="place-cancel" type="button" class="place-btn place-btn-cancel">キャンセル</button>
+      <button id="place-confirm" type="button" class="place-btn place-btn-confirm">ここに追加</button>
+    </div>
+  </div>
+
   <div class="fab-stack">
     <button id="add-spot-btn" class="fab" title="この地図の中心に喫煙所を追加" aria-label="追加">
       <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"/></svg>
@@ -81,6 +93,7 @@
       <div class="spot-meta">
         <span class="spot-distance"></span>
         <a class="spot-directions" target="_blank" rel="noopener">ルート案内</a>
+        <button class="spot-delete" type="button" hidden>削除</button>
       </div>
     </div>
   </template>
