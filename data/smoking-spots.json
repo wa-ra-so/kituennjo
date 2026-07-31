@@ -2570,5 +2570,107 @@
     "sources": [
       "カナロコ by 神奈川新聞（横浜西口エキニア横浜に喫煙所） https://www.kanaloco.jp/news/economy/article-1007136.html"
     ]
+  },
+  {
+    "id": "sendai-platform-234",
+    "name": "仙台駅ホーム（2・3・4番線）北側 喫煙所",
+    "lat": 38.2605,
+    "lng": 140.8825,
+    "address": "宮城県仙台市青葉区中央1丁目1-1 仙台駅2・3・4番線ホーム北側改札内",
+    "type": "屋内（改札内・エキナカ）",
+    "sources": [
+      "CLUB JT（仙台駅の喫煙所・喫煙可能なカフェ） https://www.clubjt.jp/place/spot/pref-4/city-04013/area-920/",
+      "仙台南つうしん（仙台駅内と周辺の喫煙所17ヶ所まとめ） https://sendaiminami-tusin.com/sendai-kituen/"
+    ]
+  },
+  {
+    "id": "sendai-espal-higashikan",
+    "name": "仙台駅3階 新幹線中央口改札先 エスパル東館 喫煙室",
+    "lat": 38.261,
+    "lng": 140.8845,
+    "address": "宮城県仙台市青葉区中央1丁目1-1 S-PAL仙台 東館3階（新幹線中央口改札内側）",
+    "type": "屋内（改札内・エキナカ）",
+    "sources": [
+      "CLUB JT（仙台駅3F 新幹線中央口改札先エスパル東館トイレ前喫煙室） https://www.clubjt.jp/map/spot/1813971?from=seo"
+    ]
+  },
+  {
+    "id": "niigata-shinkansen-platform",
+    "name": "新潟駅新幹線ホーム 喫煙所",
+    "lat": 37.9142,
+    "lng": 139.0505,
+    "address": "新潟県新潟市中央区花園1丁目 新潟駅新幹線11-14番線ホーム各中央付近（在来線CoCoLo新潟内には喫煙室なし）",
+    "type": "屋内（改札内・エキナカ）",
+    "sources": [
+      "新潟いいとこマガジン（新潟駅の喫煙所はどこにある？） https://ogata-sci.net/niigata-smoking-spot/"
+    ]
+  },
+  {
+    "id": "osaka-ekimarche-sakurabashi",
+    "name": "エキマルシェ大阪 桜橋口 喫煙所",
+    "lat": 34.6998,
+    "lng": 135.4955,
+    "address": "大阪府大阪市北区梅田3丁目 JR大阪駅桜橋口 エキマルシェ大阪内（早朝〜深夜営業）",
+    "type": "屋内（駅直結・エキナカ）",
+    "sources": [
+      "USJハック（大阪梅田 喫煙所12か所まとめ） https://usjhack.com/umeda-smokingarea/",
+      "myGLO（JR大阪駅周辺の喫煙所ナビ） https://www.myglo.com/jp/ja/support/smokingnavi/osaka-station"
+    ]
+  },
+  {
+    "id": "okayama-shinkansen-platform",
+    "name": "岡山駅新幹線ホーム（23・24番線）喫煙所",
+    "lat": 34.6665,
+    "lng": 133.9205,
+    "address": "岡山県岡山市北区駅元町 岡山駅新幹線23・24番線ホーム（東京・大阪方面）改札内",
+    "type": "屋内（改札内・エキナカ）",
+    "sources": [
+      "おか旅・岡山観光WEB（JR岡山駅 新幹線改札内まるわかりガイド） https://www.okayama-kanko.jp/okatabi/1363/page",
+      "岡山じゃーなる！（岡山駅の喫煙所まとめ） https://okayama-journal.com/okayamaeki-kitsuenjo/"
+    ]
+  },
+  {
+    "id": "kagoshimachuo-amu-2f",
+    "name": "アミュプラザ鹿児島 本館2階 喫煙所",
+    "lat": 31.581,
+    "lng": 130.5415,
+    "address": "鹿児島県鹿児島市中央町1-1 アミュプラザ鹿児島 本館2階（市営駐輪場連絡口付近）",
+    "type": "屋内（駅直結・エキナカ）",
+    "sources": [
+      "鹿児島サイト（JR鹿児島中央駅構内・商業施設での喫煙所・喫煙席まとめ） https://kagoshima.website/?p=63"
+    ]
+  },
+  {
+    "id": "kagoshimachuo-amu-premium-7f",
+    "name": "アミュプラザ鹿児島 プレミアム館7階 喫煙所（新幹線ホーム側）",
+    "lat": 31.5812,
+    "lng": 130.542,
+    "address": "鹿児島県鹿児島市中央町1-1 アミュプラザ鹿児島 プレミアム館7階",
+    "type": "屋内（駅直結・エキナカ）",
+    "sources": [
+      "鹿児島サイト（JR鹿児島中央駅構内・商業施設での喫煙所・喫煙席まとめ） https://kagoshima.website/?p=63"
+    ]
+  },
+  {
+    "id": "takamatsu-platform-heated",
+    "name": "JR高松駅ホーム 喫煙所（加熱式たばこ専用）",
+    "lat": 34.3555,
+    "lng": 134.0508,
+    "address": "香川県高松市浜ノ町 JR高松駅ホーム奥（改札内・加熱式専用）",
+    "type": "屋内（改札内・エキナカ・加熱式専用）",
+    "sources": [
+      "JR四国（駅コミ 高松駅 駅構内図） https://www.jr-shikoku.co.jp/01_trainbus/kakueki/takamatsu/kounai_map.html"
+    ]
+  },
+  {
+    "id": "matsuyama-platform-corner",
+    "name": "JR松山駅改札内 喫煙コーナー",
+    "lat": 33.8455,
+    "lng": 132.7663,
+    "address": "愛媛県松山市南江戸1丁目 JR松山駅改札内（通勤時間帯7:00-9:00・17:00-19:00は使用停止）",
+    "type": "屋内（改札内・エキナカ）",
+    "sources": [
+      "JR四国公式（お客様の声：松山駅改札内喫煙コーナーの時間帯使用停止） https://www.jr-shikoku.co.jp/customer-voice/2022-kamiki/01/"
+    ]
   }
 ]
