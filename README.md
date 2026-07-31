@@ -67,6 +67,21 @@ OSMの`amenity=smoking_area`は、駅前や公園など屋外の指定喫煙所�
 - **Client IDは公開されます**: このアプリはビルド不要の静的サイトなので、`config.js` の中身はそのまま全訪問者のブラウザに配信されます（view-source / devtoolsで誰でも見られます）。Yahoo!のClient IDには課金が紐づいていないため、悪用されても発生するのは「自分の無料枠が消費される」ことであり、身に覚えのない請求が来るわけではありませんが、それでも公開情報として扱ってください。
 - **YOLPはCORS非対応**: ローカルサーチAPIはブラウザからの直接`fetch`を許可していないため、HeartRailsと同じくJSONP（`callback`パラメータ）で呼び出しています。実機での動作確認により判明・修正済みです。
 
+## 自治体オープンデータからの取り込み（指定喫煙場所・公衆喫煙所の一次データ）
+
+一部の自治体は、指定喫煙場所・公衆喫煙所の一覧をオープンデータ（CSV）として公開しています。公式サイトのページを人手で読むのではなく、自治体自身が座標付きで公開している一次データなので、Yahoo!ロコより網羅性・正確性が高いことが期待できます。
+
+```bash
+node tools/import-opendata.mjs --taito                                  # 既知のソース（台東区）を取り込み
+node tools/import-opendata.mjs --taito --show-headers                   # 列名の自動判定だけ確認（書き込みなし）
+node tools/import-opendata.mjs --taito --dry-run                        # 件数だけ確認（書き込みなし）
+node tools/import-opendata.mjs --url <CSVのURL> --city <自治体名> --dry-run  # 未登録の自治体を試す
+```
+
+- 収録済みデータ（同じid、または既存スポットから60m以内）は上書きされません（`import-osm.mjs`と同じ挙動）。
+- 自治体CSVは列名がバラバラ・文字コードがShift_JISであることが多いため、`名称/施設名称/住所/所在地/緯度/経度`などの代表的な列名を自動判定し、UTF-8で読めなければShift_JISとして読み直します。新しいソースを追加するときは、まず`--show-headers`で列の判定結果を確認してください。
+- 既知のソースは`tools/import-opendata.mjs`内の`KNOWN_SOURCES`に追加していきます。台東区以外にも、東京都オープンデータAPIカタログサイト（`spec.api.metro.tokyo.lg.jp`）経由で他区のデータが見つかる可能性があります。
+
 ## データについて
 
 `data/smoking-spots.json` に初期データとして、47都道府県すべての県庁所在地・主要駅周辺の喫煙所を1件以上収録しています（合計205件）。
@@ -116,6 +131,8 @@ GitHub Pagesなどの静的ホスティングにそのまま配置すれば、�
 - `data/smoking-spots.json` — 喫煙所の初期データ
 - `tools/import-osm.mjs` — OpenStreetMap からデータを取り込むCLI
 - `tools/osm.mjs` — 取り込み用の共通ロジック（Overpassクエリ生成・変換・重複排除）
+- `tools/import-opendata.mjs` — 自治体オープンデータ（CSV）からデータを取り込むCLI
+- `tools/opendata.mjs` — 取り込み用の共通ロジック（CSV解析・文字コード判定・列名の自動判定）
 - `vendor/leaflet/` — 地図描画ライブラリ Leaflet（CDNに依存せずローカル同梱）
 
 ## デザイン
